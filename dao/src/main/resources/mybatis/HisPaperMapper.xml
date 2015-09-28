@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzc.dao.HisPaperMapper">
+  <resultMap id="BaseResultMap" type="com.hzc.model.HisPaper">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="score" property="score" jdbcType="REAL"/>
+    <result column="answer_start_time" property="answerStartTime" jdbcType="TIMESTAMP"/>
+    <result column="answer_end_time" property="answerEndTime" jdbcType="TIMESTAMP"/>
+    <result column="type" property="type" jdbcType="INTEGER"/>
+    <result column="close_exam" property="closeExam" jdbcType="INTEGER"/>
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="deleted" property="deleted" jdbcType="INTEGER"/>
+    <result column="user_id" property="userId" jdbcType="INTEGER"/>
+    <result column="card_id" property="cardId" jdbcType="INTEGER"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, score, answer_start_time, answer_end_time, type, close_exam, update_time, create_time, deleted,
+    user_id, card_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from his_paper
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from his_paper
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hzc.model.HisPaper" useGeneratedKeys="true" keyProperty="id">
+    insert into his_paper (id, score, answer_start_time, 
+      answer_end_time, type, close_exam, update_time,
+      create_time, deleted, user_id, card_id)
+    values (#{id,jdbcType=INTEGER}, #{score,jdbcType=REAL}, #{answerStartTime,jdbcType=TIMESTAMP}, 
+      #{answerEndTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{closeExam,jdbcType=INTEGER},
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER},
+      #{userId,jdbcType=INTEGER},  #{cardId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzc.model.HisPaper" useGeneratedKeys="true" keyProperty="id">
+    insert into his_paper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="answerStartTime != null">
+        answer_start_time,
+      </if>
+      <if test="answerEndTime != null">
+        answer_end_time,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="closeExam != null">
+        close_exam,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="cardId != null">
+        card_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="answerStartTime != null">
+        #{answerStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answerEndTime != null">
+        #{answerEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="closeExam != null">
+        #{close_exam,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzc.model.HisPaper">
+    update his_paper
+    <set>
+      <if test="score != null">
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="answerStartTime != null">
+        answer_start_time = #{answerStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answerEndTime != null">
+        answer_end_time = #{answerEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="closeExam != null">
+        close_exam = #{closeExam,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="cardId != null">
+        card_id = #{cardId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzc.model.HisPaper">
+    update his_paper
+    set score = #{score,jdbcType=REAL},
+      answer_start_time = #{answerStartTime,jdbcType=TIMESTAMP},
+      answer_end_time = #{answerEndTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      close_exam = #{closeExam,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      card_id = #{cardId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
