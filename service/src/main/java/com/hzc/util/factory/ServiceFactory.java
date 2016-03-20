@@ -75,6 +75,14 @@ public class ServiceFactory {
     public static GenExamService genExamService() {
         return get(GenExamService.class);
     }
+
+    public static ManagementService managementService() {
+        return get(ManagementService.class);
+    }
+
+    public static HisPaperItemService HisPaperItemService() {
+        return  get(HisPaperItemService.class);
+    }
 }
 
 

@@ -21,8 +21,11 @@ public class PufaImportSqlTest extends SupperJunit {
 
     @Test
     public void genPufa() throws IOException, SQLException {
-        FileUtils.forceDelete(new File("./question.js"));
-        FileUtils.forceDelete(new File("./option.js"));
+        try {
+            FileUtils.forceDelete(new File("./question.js"));
+            FileUtils.forceDelete(new File("./option.js"));
+        } catch (IOException e) {
+        }
         List<String> sqls = new ArrayList<String>();
         List<PufaImport> pufaImports = S.pufaImportService().loadAll();
         int optionId = 1;

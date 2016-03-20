@@ -49,25 +49,30 @@ public class UserCtrl {
     }
 
     /**
-     * 青岛司法局 普法教育APP
+     * 考试登录
+     * TODO 单例登录，意外关闭浏览器，确定退出
      */
     public void lcpfForExam() {
         String account = W.getString("idCard", "账号必填");
 
         int userId = S.sysUserService().loginForPufa(account);
+        if (userId == 0) {
+            W.getReq().setAttribute("result", "您未报名，不能参加考试");
+            W.forward("CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/login.jsp");
+        } else {
+            W.getSession().setAttribute("userId", userId);
+            W.getSession().setAttribute("username", account);
 
-        W.getSession().setAttribute("userId", userId);
-        W.getSession().setAttribute("username", account);
-
-        W.redirect("CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/exam_pre.jsp");
+            W.redirect("CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/exam_pre.jsp");
+        }
     }
 
     /**
      * 考试报名
      */
     public void enrollExam() {
-        String disk = File.separator + "var" + File.separator + "local" + File.separator + "lcsf_lts";
-        String folder = File.separator + "upload" + File.separator + "photo";
+        String disk = "/" + "var" + "/" + "local" + "/" + "lcsf_lts";
+        String folder = "/" + "upload" + "/" + "photo";
 
         try {
 
@@ -161,5 +166,23 @@ public class UserCtrl {
     public void logoutForLp() {
         W.getSession().removeAttribute("userId");
         W.redirect("index_user.jsp");
+    }
+
+    /**
+     * 开卷考试登录
+     */
+    public void loginForKaijuan() {
+        String account = W.getString("idCard", "账号必填");
+        SysUser user = S.sysUserService().getUserByStatus(account, 3);
+        if (null == user) {
+            W.getReq().setAttribute("result", "您未报名，不能参加考试");
+            W.forward("CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/login.jsp");
+        } else {
+            W.getSession().setAttribute("user", user);
+            W.getSession().setAttribute("username", account);
+            HttpSessionUtil.setUserId(user.getId());
+            W.redirect("CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/exam_pre.jsp");
+        }
+
     }
 }

@@ -1,5 +1,8 @@
 package com.hzc.model;
 
+import sun.java2d.pipe.SpanShapeRenderer;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -33,6 +36,68 @@ public class SysConfig {
     private long cardStartTimeL;
 
     private long cardEndTimeL;
+
+    private String examStartTimeStr;
+
+    private String examEndTimeStr;
+
+    private String enrollmentStartTimeStr;
+
+    private String enrollmentEndTimeStr;
+
+    private String cardStartTimeStr;
+
+    private String cardEndTimeStr;
+
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    public String getExamStartTimeStr() {
+        return examStartTimeStr;
+    }
+
+    public void setExamStartTimeStr(String examStartTimeStr) {
+        this.examStartTimeStr = format.format(getExamStartTime());
+    }
+
+    public String getExamEndTimeStr() {
+        return examEndTimeStr;
+    }
+
+    public void setExamEndTimeStr(String examEndTimeStr) {
+        this.examEndTimeStr = format.format(getExamEndTime());
+    }
+
+    public String getEnrollmentStartTimeStr() {
+        return enrollmentStartTimeStr;
+    }
+
+    public void setEnrollmentStartTimeStr(String enrollmentStartTimeStr) {
+        this.enrollmentStartTimeStr = format.format(getEnrollmentStartTime());
+    }
+
+    public String getEnrollmentEndTimeStr() {
+        return enrollmentEndTimeStr;
+    }
+
+    public void setEnrollmentEndTimeStr(String enrollmentEndTimeStr) {
+        this.enrollmentEndTimeStr = format.format(getEnrollmentEndTime());
+    }
+
+    public String getCardStartTimeStr() {
+        return cardStartTimeStr;
+    }
+
+    public void setCardStartTimeStr(String cardStartTimeStr) {
+        this.cardStartTimeStr = format.format(getCardStartTime());
+    }
+
+    public String getCardEndTimeStr() {
+        return cardEndTimeStr;
+    }
+
+    public void setCardEndTimeStr(String cardEndTimeStr) {
+        this.cardEndTimeStr = format.format(getCardEndTime());
+    }
 
     public long getExamStartTimeL() {
         return examStartTimeL;
@@ -97,6 +162,7 @@ public class SysConfig {
     public void setExamStartTime(Date examStartTime) {
         this.examStartTime = examStartTime;
         setExamStartTimeL(examStartTime.getTime());
+        setExamStartTimeStr("");
     }
 
     public Date getExamEndTime() {
@@ -106,6 +172,7 @@ public class SysConfig {
     public void setExamEndTime(Date examEndTime) {
         this.examEndTime = examEndTime;
         setExamEndTimeL(examEndTime.getTime());
+        setExamEndTimeStr("");
     }
 
     public Date getEnrollmentStartTime() {
@@ -115,6 +182,7 @@ public class SysConfig {
     public void setEnrollmentStartTime(Date enrollmentStartTime) {
         this.enrollmentStartTime = enrollmentStartTime;
         setEnrollmentStartTimeL(enrollmentStartTime.getTime());
+        setEnrollmentStartTimeStr("");
     }
 
     public Date getEnrollmentEndTime() {
@@ -124,6 +192,7 @@ public class SysConfig {
     public void setEnrollmentEndTime(Date enrollmentEndTime) {
         this.enrollmentEndTime = enrollmentEndTime;
         setEnrollmentEndTimeL(enrollmentEndTime.getTime());
+        setEnrollmentEndTimeStr("");
     }
 
     public Date getCardStartTime() {
@@ -133,6 +202,7 @@ public class SysConfig {
     public void setCardStartTime(Date cardStartTime) {
         this.cardStartTime = cardStartTime;
         setCardStartTimeL(cardStartTime.getTime());
+        setCardStartTimeStr("");
     }
 
     public Date getCardEndTime() {
@@ -142,6 +212,7 @@ public class SysConfig {
     public void setCardEndTime(Date cardEndTime) {
         this.cardEndTime = cardEndTime;
         setCardEndTimeL(cardEndTime.getTime());
+        setCardEndTimeStr("");
     }
 
     public Date getUpdateTime() {

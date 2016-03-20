@@ -48,6 +48,12 @@
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
+  <!--
+    判断IE浏览器版本小于IE8，则直接提示更新。
+  -->
+  <!--[if lte IE 7]>
+  <script>window.location.href = 'http://cdn.dmeng.net/upgrade-your-browser.html?referrer=' + location.href;</script>
+  <![endif]-->
   <!--[if lt IE 9]>
   <script src="${basePath}assets/js/html5shiv.js"></script>
   <script src="${basePath}assets/js/respond.min.js"></script>
@@ -62,31 +68,27 @@
       background-color: #1687d5;
     }
 
-    .my-button {
-      width: 190px;
-      height: 40px;
-      color: white;
-      text-align: center;
-      line-height: 18px;
-      font-size: 18px;
-      background: #1687D5;
-      border-radius: 5px;
-    }
-
     .my-button-join {
       width: 100px;
       height: 35px;
       color: white;
       text-align: center;
-      background: #428bca;
+      background: #12a5eb;
+      transition: all 0.15s ease 0s;
       font-weight: 800;
       /*float: right;*/
       border-radius: 5px;
     }
 
+    .my-button-join:hover {
+      text-decoration: none;
+      background-color: #048cb9 !important;
+      border: 1px solid #005aa7;
+    }
+
     .my-title-font {
       font-size: 38px;
-      font-weight: 800;
+      font-weight: 600;
       color: white;
       line-height: 48px;
       font-family: "微软雅黑";
@@ -94,7 +96,7 @@
       text-shadow: 1px 1px 3px #cccccc;
       -webkit-text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #959494 -1px 0 0, #959494 0 -1px 0;
       -moz-text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
-      text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+      text-shadow: 1px 1px 1px rgb(0, 0, 0, 0.1);
       *filter: Glow(Color=#000, Strength=1);
     }
 
@@ -127,44 +129,41 @@
                  style="background-color: #B0B0B0 !important;">
               <div class="widget-body my-border-radius">
                 <div class="widget-main my-border-radius">
-                                <div class="row" style="height: 210px !important;">
+                  <div class="row" style="height: 210px !important;">
                     <div class="col-xs-12">
                       <h4 class="header blue lighter bigger" style="font-weight: 800;">
-                        <img src="${basepath}assets/system/pufa/img/exam-login-tubiao.png" style="width:22px;height:auto;margin-top: 0px;">
-                                     <%--<i class="icon-edit blue"></i>--%>
+                        <img src="${basepath}assets/system/pufa/img/exam-login-tubiao.png"
+                             style="width:26px;height:auto;margin-top: -5px;">
                         考试登录
                       </h4>
+
                       <div class="space-6"></div>
-                      <form role="form" class="form-horizontal" action="UserCtrl.lcpfForExam.do"
-                            method="post"
-                            onsubmit="return validate(this);"
+                      <input type="hidden" id="result" value="${requestScope.result}">
+
+                      <form role="form" class="form-horizontal" action="UserCtrl.loginForKaijuan.do"
+                            method="post" onsubmit="return validate(this);"
                             style="padding: 0px 40px 10px 0px !important;">
-                        <div class="form-group" >
-                          <label for="idCard"
-                                 class="col-sm-4 control-label no-padding-right"><span style="font-size:20px;">身份证：</span></label>
+                        <div class="form-group">
+                          <label for="idCard" class="col-sm-4 control-label no-padding-right" style="margin-top: -3px;">
+                            <span style="font-size:20px;">身份证：</span>
+                          </label>
 
                           <div class="col-sm-8">
-                            <input id="idCard" type="text" name="idCard" style="margin-top:0px;"
-                                   class="col-xs-12 col-sm-12"
-                                   placeholder="请输入您的身份证号">
+                            <input id="idCard" type="text" name="idCard"
+                                   style="margin-top:0px;" class="col-xs-12 col-sm-12" placeholder="请输入您的身份证号">
                           </div>
                         </div>
 
                         <div class="space-4"></div>
 
-                        <div class="clearfix"
-                             style="margin-top: 20px !important;text-align: center;">
-                             <button id="submit-exam-btn-id" type="submit"
-                                  class="my-button-join btn-info"
-                          <%--disabled="disabled"--%>
-                                  style="background-color: #2490D7!important;font-size:20px;height:40px;">
-                              登&nbsp;&nbsp;录
+                        <div class="clearfix" style="margin-top: 20px !important;text-align: center;">
+                          <button id="submit-exam-btn-id" type="submit" class="my-button-join"
+                                  style="font-size:16px;height:35px;">
+                            登&nbsp;&nbsp;录
                           </button>
                         </div>
-
                         <div class="space-4"></div>
                       </form>
-
                     </div>
                   </div>
                 </div>
@@ -173,7 +172,6 @@
             <!-- /widget-body -->
           </div>
           <!-- /login-box -->
-
         </div>
         <!-- /.col -->
       </div>
@@ -184,11 +182,8 @@
 <!-- /.main-container -->
 
 <!-- basic scripts -->
-
 <!--[if !IE]> -->
-
 <script src="${basePath}assets/js/jquery-2.0.3.min.js"></script>
-
 <!-- <![endif]-->
 
 <!--[if IE]>
@@ -196,11 +191,9 @@
 <![endif]-->
 
 <!--[if !IE]> -->
-
 <script type="text/javascript">
   window.jQuery || document.write("<script src='${basePath}assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
 </script>
-
 <!-- <![endif]-->
 
 <!--[if IE]>
@@ -215,32 +208,27 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-  function show_box(id) {
-    jQuery('.widget-box.visible').removeClass('visible');
-    jQuery('#' + id).addClass('visible');
-  }
-
   function validate(form) {
     var idCardDom = $('#idCard');
     var idCard = idCardDom.val();
-    var isCheck = $('#remember-me-id').val();
-//        if(isCheck){
-//            window.localStorage.setItem('_pho')
-//        }
     var r = new RegExp('^[1-9]([0-9]{16}|[0-9]{13})[xX0-9]$');
     if (idCard.length != 18 || !r.test(idCard)) {
       alert('请输入合法的身份证号');
       idCardDom.focus();
       return false;
     }
-    var idSeqDom = $('#idSeq');
-    var idSeq = idSeqDom.val();
-    if (idSeq.length < 6 || idSeq.length > 8) {
-      alert('请输入合法的报名序号');
-      idSeqDom.focus();
-      return false;
-    }
   }
+  window.document.body.addEventListener('keydown', function (evt) {
+    if (evt.keyCode == 81 && evt.ctrlKey && evt.shiftKey && evt.altKey) {
+      parent.postMessage('close win', '*');
+    }
+  });
+  $(function () {
+    var result = $('#result').val();
+    if (result) {
+      alert(result);
+    }
+  })
 </script>
 </body>
 </html>

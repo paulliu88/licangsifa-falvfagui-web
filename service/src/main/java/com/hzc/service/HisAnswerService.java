@@ -5,6 +5,7 @@ import com.hzc.framework.ssh.service.TrancationType;
 import com.hzc.framework.ssh.service.Transaction;
 import com.hzc.model.HisAnswer;
 import com.hzc.util.alias.S;
+import org.apache.log4j.Logger;
 
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import java.util.Date;
  */
 @Transaction
 public class HisAnswerService {
-
+    private static Logger log = Logger.getLogger(HisAnswerService.class);
     /**
      * 检查用户答案的记录对象是否存在，否则，插入。
      *
@@ -52,6 +53,7 @@ public class HisAnswerService {
      * @return
      */
     public boolean addAnswerTimes(Integer userId, Integer questionId) {
+//        log.error("hzcerror:add answerTimes for test");
         HisAnswer hisAnswer = D.hisAnswerMapper().selectByUserIdAndQuestionId(userId, questionId);
         if (null == hisAnswer) {
             HisAnswer answer = new HisAnswer();
@@ -234,6 +236,7 @@ public class HisAnswerService {
      * @param userId
      */
     public void addEffectAnswerTimesForTest(Integer questionId, int userId) {
+//        log.error("hzcerror:addEffectAnswerTimes for test and subtract styTimes");
         S.lpQuestionService().subtractStyTimes(userId, questionId);
         saveEffectAnswerTimes(userId, questionId);
         addAnswerTimes(userId, questionId);

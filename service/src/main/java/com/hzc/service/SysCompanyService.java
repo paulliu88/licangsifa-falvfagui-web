@@ -1,10 +1,14 @@
 package com.hzc.service;
 
 import com.hzc.factory.alias.D;
+import com.hzc.framework.ssh.repository.mybatis.DataTablePager;
 import com.hzc.framework.ssh.service.TrancationType;
 import com.hzc.framework.ssh.service.Transaction;
 import com.hzc.model.SysCompany;
+import com.hzc.vo.PageVO;
+import com.hzc.vo.ResultVO;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,5 +70,126 @@ public class SysCompanyService {
     public Integer addSelfCompany(SysCompany company) {
         D.sysCompanyMapper().insertSelfCompany(company);
         return company.getId();
+    }
+
+    /**
+     * @return
+     */
+    @DataTablePager
+    public List<SysCompany> ajaxGetCompanyGroupList() {
+        return D.sysCompanyMapper().selectCmpByPid();
+    }
+
+    /**
+     * @return
+     */
+
+    public List<SysCompany> listCmpByPid() {
+        return D.sysCompanyMapper().selectCmpGroup();
+    }
+
+    /**
+     * 返回添加部门组信息结果
+     *
+     * @param group
+     * @return
+     */
+    public ResultVO addCompanyGroup(SysCompany group) {
+        Date date = new Date();
+        group.setUpdateTime(date);
+        Integer integer = insertCompanyGroup(group);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+
+    /**
+     * 返回部门组信息的更新结果
+     *
+     * @param group
+     * @return
+     */
+    public ResultVO updateCompanyGroup(SysCompany group) {
+        Integer integer = updateCompanyGroupById(group);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+
+    /**
+     * 返回部门组信息更新条数
+     *
+     * @param group
+     * @return
+     */
+    public Integer updateCompanyGroupById(SysCompany group) {
+        return D.sysCompanyMapper().updateByPrimaryKeySelective(group);
+    }
+
+    /**
+     * 返回添加SysCompany条数
+     *
+     * @param group
+     * @return
+     */
+    private Integer insertCompanyGroup(SysCompany group) {
+        return D.sysCompanyMapper().insertCompanyGroup(group);
+    }
+
+    /**
+     * 返回单位分组中的具体单位
+     *
+     * @param vo  分页结果和查询参数
+     * @param pid 单位的父id
+     * @return
+     */
+    @DataTablePager
+    public List<SysCompany> getJuniorCompanyList(PageVO vo, Integer pid) {
+        return D.sysCompanyMapper().selectJuniorCompanyList(vo, pid);
+    }
+
+    /**
+     * 返回删除部门信息
+     *
+     * @param id
+     * @return
+     */
+    public ResultVO deleteCompany(Integer id) {
+        Integer integer = deleteCompanyById(id);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回删除SysCompany的条数
+     *
+     * @param id
+     * @return
+     */
+    private Integer deleteCompanyById(Integer id) {
+        return D.sysCompanyMapper().deleteById(id);
+    }
+    /**
+     * 返回添加部门分组下的部门信息结果
+     *
+     * @param company
+     * @return
+     */
+    public ResultVO addCompany(SysCompany company,Integer id) {
+        Date date = new Date();
+        company.setUpdateTime(date);
+        company.setPid(id);
+        Integer integer = insertCompanyGroup(company);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
     }
 }

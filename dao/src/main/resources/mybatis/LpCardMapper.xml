@@ -320,4 +320,12 @@
       AND c.seat_no = #{card.seatNo}
     </if>
   </select>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    lp_card
+    WHERE
+    user_id = #{userId}
+  </select>
 </mapper>

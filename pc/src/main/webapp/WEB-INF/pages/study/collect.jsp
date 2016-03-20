@@ -41,18 +41,18 @@
 
                                     <div class="tab-content" id="my-shoucang-tab-content">
                                         <div id="collect-panduan-tab" class="tab-pane in active my-tab-pane">
-                                            <div id="shoucang-panduanti-id">
+                                            <div id="shoucang-panduanti-id" class="my-card-scroll">
                                                 <%--************************* CONTENT ******************************--%>
                                             </div>
                                         </div>
                                         <div id="collect-danxuan-tab" class="tab-pane my-tab-pane">
-                                            <div id="shoucang-danxuanti-id">
+                                            <div id="shoucang-danxuanti-id" class="my-card-scroll">
                                                 <%--************************* CONTENT ******************************--%>
                                             </div>
                                         </div>
 
                                         <div id="collect-duoxuan-tab" class="tab-pane my-tab-pane">
-                                            <div id="shoucang-duoxuanti-id">
+                                            <div id="shoucang-duoxuanti-id" class="my-card-scroll">
                                                 <%--************************* CONTENT ******************************--%>
                                             </div>
                                         </div>

@@ -40,19 +40,20 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="my-cuoti-tab-content">
+
                                         <div id="error-panduan-tab" class="tab-pane in active my-tab-pane">
-                                            <div id="cuoti-panduanti-id">
+                                            <div id="cuoti-panduanti-id" class="my-card-scroll">
                                                 <%--************************* CONTENT ******************************--%>
                                             </div>
                                         </div>
                                         <div id="error-danxuan-tab" class="tab-pane my-tab-pane">
-                                            <div id="cuoti-danxuanti-id">
+                                            <div id="cuoti-danxuanti-id" class="my-card-scroll">
                                                 <%--************************* CONTENT ******************************--%>
                                             </div>
                                         </div>
 
                                         <div id="error-duoxuan-tab" class="tab-pane my-tab-pane">
-                                            <div id="cuoti-duoxuanti-id">
+                                            <div id="cuoti-duoxuanti-id" class="my-card-scroll">
                                                 <%--************************* CONTENT ******************************--%>
                                             </div>
                                         </div>

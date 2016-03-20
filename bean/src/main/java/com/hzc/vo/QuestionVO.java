@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Created by LiuJY on 2015/4/29.
- * <p/>
+ * <p>
  * 问题，包括问题题干，选项
  */
 public class QuestionVO extends AnswerCardVO {
@@ -18,6 +18,17 @@ public class QuestionVO extends AnswerCardVO {
     private int collectionType;
 
     private String questionAnswer;
+
+    //用户答案
+    private String userAnswer;
+
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
 
     public String getQuestionAnswer() {
         return questionAnswer;

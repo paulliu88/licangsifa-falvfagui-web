@@ -107,7 +107,7 @@
 
 </head>
 
-<body style="min-width: 1100px;background-color: #ffffff;" class="container">
+<body style="min-width: 1280px;background-color: #ffffff;" class="container">
 <div id="my-main-body-id" style="margin: 0 30px;">
 
   <div class="navbar navbar-default" id="navbar">
@@ -215,7 +215,7 @@
           </li>
 
           <li id="my-user-login-menu" data-is-modal="logout" data-href="CommonCtrl.goTo.do?path=/index_user.jsp">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);" >
+            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
               <%--<i class="icon-envelope icon-animated-vertical"></i>--%>
               <img src="/assets/system/pufa/img/icon/fanhui.png" class="my-menu-item">
               返回登录
@@ -264,7 +264,8 @@
       </div>
       <a id="btn-fullscreen-id" class="pull-right " href="javascript:void(0);"
          style="position: absolute; top: 0px; color: black; right: 0px; display: none;">
-        <span class="block white glyphicon glyphicon-resize-full" title="点击进入或退出全屏模式（快捷键是：双击F10）" aria-hidden="true"></span>
+        <span class="block white glyphicon glyphicon-resize-full" title="点击进入或退出全屏模式（快捷键是：双击F10）"
+              aria-hidden="true"></span>
       </a>
       <!-- /.navbar-header -->
     </div>
@@ -399,11 +400,20 @@
            }
            */
           $('#btn-fullscreen-id').click(myFullScreen);
-          $(window.document).keydown(function(evt){
-            if(evt.keyCode == 121){
+          $(window.document).keydown(function (evt) {
+            if (evt.keyCode == 121) {
               myFullScreen.apply($('#btn-fullscreen-id')[0]);
             }
           });
+
+          //          已废弃
+          //          $(function () {
+          //            var width = $(document).width();
+          //            alert(width);
+          //            if (width < 1200) {
+          //              $('#my-user-login-menu').hide();
+          //            }
+          //          });
         </script>
 
         <style>
@@ -430,6 +440,13 @@
             background: ${param.contentBackground};
             min-height: 500px;
 
+          }
+        </style>
+        <style type="text/css">
+          .my-card-scroll {
+            max-height: 360px;
+            overflow: auto;
+            margin-bottom: 10px;
           }
         </style>
 

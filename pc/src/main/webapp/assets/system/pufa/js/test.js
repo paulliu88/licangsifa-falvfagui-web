@@ -10,7 +10,7 @@
     function render(templateStr, data) {
         return templateStr.replace(/\{([\w\.]*)\}/g, function (str, key) {
             var keys = key.split("."),
-                    v = data[keys.shift()];
+                v = data[keys.shift()];
             for (var i = 0, l = keys.length; i < l; i++)
                 v = v[keys[i]];
             return (typeof v !== "undefined" && v !== null) ? v : "";
@@ -21,14 +21,14 @@
      * 初始化答题卡
      */
     function initQuestionCardMoni() {
-        var firstQuestionId = 1;
+        window.firstQuestionId = 1;
 
         $.ajax({
             type: 'post',
             url: Routers.pufa.study.getCardQuestionListForTest,
             success: function (data) {
 
-                firstQuestionId = data[0].questionId;
+                window.firstQuestionId = data[0].questionId;
 
                 var danxuanHtmlStr = '';
                 var panduanHtmlStr = '';
@@ -107,11 +107,11 @@
                 //点击单个question时加载详细的question
                 $('#moni-question-detail-id').empty().html(questionAllStr);
 
-                getQuestion(firstQuestionId);
+                getQuestion(window.firstQuestionId);
                 $('#moni-question-detail-id').children().first().show();
-                traceQuestion(firstQuestionId);
-                traceQuestionTab(firstQuestionId);
-                window.__questionId__ = firstQuestionId;
+                traceQuestion(window.firstQuestionId);
+                traceQuestionTab(window.firstQuestionId);
+                window.__questionId__ = window.firstQuestionId;
             }
         })
     }
@@ -128,7 +128,7 @@
                 getQuestion(_questionId);
             }
             $('#moni-question-detail-id').children().hide();
-            $('#moni-' + _questionId).fadeIn(500);
+            $('#moni-' + _questionId).show();
             traceQuestion(_questionId);
             traceQuestionTab(_questionId);
         });
@@ -235,7 +235,7 @@
                 if (exist == 0) {
                     getQuestion(nQuestionId);
                 }
-                $('#moni-' + _questionId).hide().prev().fadeIn(500);
+                $('#moni-' + _questionId).hide().prev().show();
                 traceQuestion(nQuestionId);
                 traceQuestionTab(nQuestionId);
             }
@@ -251,9 +251,11 @@
                 if (exist == 0) {
                     getQuestion(nQuestionId);
                 }
-                $('#moni-' + _questionId).hide().next().fadeIn(500);
+                $('#moni-' + _questionId).hide().next().show();
                 traceQuestion(nQuestionId);
                 traceQuestionTab(nQuestionId);
+            } else {
+                $('#moni-' + _questionId).children().eq(3).children().eq(2).children().attr('disabled', 'disabled').removeClass('my-btn-moni-question-next');
             }
         });
     }
@@ -357,28 +359,40 @@
         }, 1000);
     }
 
+    /**
+     * 记录his_answer，超过5秒，记录effectAnswerTimes，未超过5秒，记录answerTimes
+     * @param questionId
+     */
     function addAnswerTimes(questionId) {
         var resu = $('#moni-' + questionId).prop('timeout');
+        //是否已经添加过做题次数：一次模拟考试，只添加一次有效答题次数或答题次数
+        var added = $('#moni-' + questionId).prop('data-added');
         if (resu == 'true') {
-            $.ajax({
-                url: Routers.pufa.test.addEffectAnswerTimes,
-                data: {
-                    questionId: questionId
-                },
-                success: function () {
-                },
-                error: function () {
-                }
-            })
+            if (added != 'true') {
+                $('#moni-' + questionId).prop('data-added', 'true');
+                $.ajax({
+                    url: Routers.pufa.test.addEffectAnswerTimes,
+                    data: {
+                        questionId: questionId
+                    },
+                    success: function () {
+                    },
+                    error: function () {
+                    }
+                })
+            }
         } else {
-            $.ajax({
-                url: Routers.pufa.test.addAnswerTimes,
-                data: {
-                    questionId: questionId
-                }, success: function () {
-                }, error: function () {
-                }
-            })
+            if (added != 'true') {
+                $('#moni-' + questionId).prop('data-added', 'true');
+                $.ajax({
+                    url: Routers.pufa.test.addAnswerTimes,
+                    data: {
+                        questionId: questionId
+                    }, success: function () {
+                    }, error: function () {
+                    }
+                })
+            }
         }
 
     }
@@ -486,6 +500,7 @@
             queRenResult();
         }
         function queRenResult() {
+            myClearInterval();
             var __dataStr = JSON.stringify(__data);
             $.ajax({
                 url: Routers.pufa.error.saveErrors,
@@ -502,21 +517,19 @@
                 //如果通过考试弹出成功，没有通过弹出继续努力
                 if (gritter) {
                     window._effectDialog = bootbox.dialog({
-                        message: '<img src="assets/system/pufa/img/gif/80-100.gif" style="width: 100%;height: 500px;">'
+                        backdrop: true,
+                        message: '<img src="assets/system/pufa/img/gif/80-100.gif" style="width: 518px;height: 400px;">'
                     });
                 } else {
                     window._effectDialog = bootbox.dialog({
-                        message: '<img src="assets/system/pufa/img/gif/60.gif" style="width: 100%;height: 500px;">'
+                        backdrop: true,
+                        message: '<img src="assets/system/pufa/img/gif/60.gif" style="width: 518px;height: 400px">'
                     });
                 }
             }, 2000);
             var submitResut = bootbox.dialog({
                 message: htmlStr,
                 buttons: {
-                    "button": {
-                        "label": '取消',
-                        "className": "btn-sm"
-                    },
                     "success": {
                         "label": '确认',
                         "className": "btn-sm btn-success",
@@ -534,16 +547,16 @@
                             window.__check_parsing__ = true;
                             $('#submit-exam-btn-id').hide();
                             myClearInterval();
-                            var showedQuestionDom = $('#moni-question-detail-id').children().filter(function (index) {
-                                return $(this).css('display') != 'none';
-                            }).find('.my-btn-moni-question-next');
-                            var _questionId = $(showedQuestionDom).attr('data-question-id');
-                            traceQuestion(_questionId);
+                            traceQuestion(window.firstQuestionId);
+                            traceQuestionTab(window.firstQuestionId);
+                            $('#moni-question-detail-id').children().hide();
+                            $('#moni-' + window.firstQuestionId).show();
                         }
                     }
 
                 }
             });
+            closeResultDialog();
         }
     }
 
@@ -579,7 +592,7 @@
         //如果是查看解析，则判断每个题用户答题情况
         if (window.__check_parsing__) {
             judgeAnswer(questionId);
-            var userAnswer = $('#moni-' + questionId).prop('userAnswerStr');
+            var userAnswer = $('#moni-' + questionId).prop('userAnswerStr') || [];
             var questionAnswer = $('#moni-' + questionId).prop('questionAnswerStr');
             var userResult = $('#moni-' + questionId).prop('userResult');
             $('#moni-' + questionId).children().eq(2).children().children('input').attr('disabled', 'disabled');
@@ -588,7 +601,7 @@
                 return;
             }
             var result = '';
-            if (userAnswer.length == 0) {
+            if (userAnswer && userAnswer.length == 0) {
                 result = '<div style="color: red;font-size:18px;">未做';
             } else {
                 if (userResult == 'true') {
@@ -673,6 +686,18 @@
     function myClearInterval() {
         window.clearInterval(window.iter);
         window.clearInterval(window.iter2);
+    }
+
+    /**
+     * 关闭模拟测试结果dialog
+     */
+    function closeResultDialog() {
+        $('.modal-body').delegate('.bootbox-close-button', 'click', function () {
+            var dialogs = $('.bootbox');
+            if (dialogs.length == 1) {
+                window.location.replace('CommonCtrl.goTo.do?path=/WEB-INF/pages/study/test_pre.jsp');
+            }
+        })
     }
 
     var reInitForTest = function () {

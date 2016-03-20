@@ -4,6 +4,7 @@ import com.hzc.model.SysCompany;
 import com.hzc.util.alias.S;
 import com.hzc.util.alias.W;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -33,5 +34,12 @@ public class CommonCtrl {
     public void ajaxGetCompany() {
         List<SysCompany> companys = S.sysCompanyService().listStandardCompanies();
         W.writeJsonArray(companys);
+    }
+
+    /**
+     * 重定向到主页
+     */
+    public void goToIndexJsp() {
+        W.forward("/main.jsp");
     }
 }

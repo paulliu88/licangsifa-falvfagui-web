@@ -84,4 +84,12 @@
         <include refid="Base_Column_List"/>
         FROM lp_option where question_id = #{questionId}
     </select>
+    <select id="selectJuniorOptionList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        lp_option
+        WHERE
+        question_id = #{questionGroupId}
+    </select>
 </mapper>

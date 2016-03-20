@@ -128,4 +128,111 @@
       VALUES
       (#{name},#{password},#{deleted},#{pid})
     </insert>
+    <select id="selectReportGroup" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_company
+        WHERE
+        pid IS NULL
+        AND
+        deleted = 1
+    </select>
+    <select id="selectCmpByPid" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_company
+        WHERE (pid IS  NULL OR pid = -1)
+        AND deleted = 1
+        ORDER  BY id
+    </select>
+
+    <select id="selectJuniorCompanyList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_company u
+        WHERE
+        u.deleted = 1
+        AND u.pid = #{companyGroupId}
+        ORDER  BY ${vo.sort} ${vo.order}
+    </select>
+    <insert id="insertCompanyGroup" parameterType="com.hzc.model.SysCompany">
+        insert into sys_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+
+            <if test="deleted != null">
+                #{deleted,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid ,jdbcType=INTEGER},
+            </if>
+
+        </trim>
+    </insert>
+
+    <select id="selectJuniorCompanyListCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM (SELECT
+        u.id,
+        u.name,
+        u.password,
+        u.update_time
+        FROM
+        sys_user u
+        WHERE
+        u.deleted = 1
+        AND u.id = #{companyGroupId}
+        )
+    </select>
+
+    <select id="selectCmpGroup" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        sys_company
+        WHERE
+        deleted = 1
+        AND (pid is  NULL OR pid=-1)
+        ORDER BY id
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from sys_company
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>

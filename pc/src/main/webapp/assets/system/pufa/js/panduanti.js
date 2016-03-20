@@ -166,27 +166,13 @@
                 }
 
                 //初始化questionCard
-                //$('#xuexi-danxuanti-id').append(danxuanHtmlStr).children().first().fadeIn(500);
-                //var danxuanBtns = $('#xuexi-danxuanti-id').next().next().children();
-                //var danxuanBtnPre = danxuanBtns.eq(0).attr('data-prev', '0');
-                //var danxuanBtnNext = danxuanBtns.eq(2).attr('data-all-ye', danxuanYeshu).attr('data-next', 2);
-                //var danxuanSpans = danxuanBtns.eq(1).children();
-                //danxuanSpans.eq(1).html(danxuanYeshu);
-                //danxuanSpans.eq(0).html(1);
-                $('#xuexi-panduanti-id').append(panduanHtmlStr).children().first().fadeIn(500);
+                $('#xuexi-panduanti-id').append(panduanHtmlStr).children().first().show();
                 var panduanBtns = $('#xuexi-panduanti-id').next().next().children();
                 var panduanBtnPre = panduanBtns.eq(0).attr('data-prev', '0');
                 var panduanBtnNext = panduanBtns.eq(2).attr('data-all-ye', panduanYeshu).attr('data-next', 2);
                 var panduanSpans = panduanBtns.eq(1).children();
                 panduanSpans.eq(1).html(panduanYeshu);
                 panduanSpans.eq(0).val(1);
-                //$('#xuexi-duoxuanti-id').append(duoxuanHtmlStr).children().first().fadeIn(500);
-                //var duoxuanBtns = $('#xuexi-duoxuanti-id').next().next().children();
-                //var duoxuanBtnPre = duoxuanBtns.eq(0).attr('data-prev', '0');
-                //var duoxuanBtnNext = duoxuanBtns.eq(2).attr('data-all-ye', duoxuanYeshu).attr('data-next', 2);
-                //var duoxuanSpans = duoxuanBtns.eq(1).children();
-                //duoxuanSpans.eq(1).html(duoxuanYeshu);
-                //duoxuanSpans.eq(0).html(1);
 
                 //初始化2000个空的QuestionDetail的div，用来存储2000个question
                 //点击单个question时加载详细的question
@@ -200,10 +186,7 @@
                     getQuestion(___questionId);
                 }
                 $('#xuexi-question-detail-id').children().hide();
-                $('#xuexi-' + ___questionId).fadeIn(500);
-                //setUpdateStatus($('#xuexi-' + ___questionId));
-                //$('#xuexi-'+___questionId).fadeIn(500);
-
+                $('#xuexi-' + ___questionId).show();
                 traceQuestionTab(___questionId);
                 traceQuestion(___questionId);
                 window.___questionId__ = ___questionId;
@@ -220,7 +203,7 @@
             var dangqianye = parseInt($(yeSpans).eq(0).val());
 
             if (dangqianye > 1) {
-                $(this).parent().prev().prev().children().eq(dangqianye - 1).hide().prev().fadeIn(500);
+                $(this).parent().prev().prev().children().eq(dangqianye - 1).hide().prev().show();
                 $(yeSpans).eq(0).val(dangqianye - 1);
             }
         });
@@ -230,7 +213,7 @@
             var suoyouye = parseInt($(yeSpans).eq(1).html());
 
             if (dangqianye < suoyouye) {
-                $(this).parent().prev().prev().children().eq(dangqianye - 1).hide().next().fadeIn(500);
+                $(this).parent().prev().prev().children().eq(dangqianye - 1).hide().next().show();
                 $(yeSpans).eq(0).val(dangqianye + 1);
             }
         });
@@ -248,7 +231,7 @@
                     getQuestion(_questionId);
                 }
                 $('#xuexi-question-detail-id').children().hide();
-                $('#xuexi-' + _questionId).fadeIn(500);
+                $('#xuexi-' + _questionId).show();
                 setUpdateStatus($('#xuexi-' + _questionId));
                 traceQuestion(_questionId);
             }
@@ -288,27 +271,6 @@
                 for (var o = 0; o < options.length; o++) {
                     var option = options[o];
                     option.type = _type;
-                    var label = 'A';
-                    switch (o) {
-                        case 0:
-                            break;
-                        case 1:
-                            label = 'B';
-                            break;
-                        case 2:
-                            label = 'C';
-                            break;
-                        case 3:
-                            label = 'D';
-                            break;
-                        case 4:
-                            label = 'E';
-                            break;
-                        case 5:
-                            label = 'F';
-                            break;
-                    }
-                    option.label = label;
                     htmlOptionsStr += render(templateOption, option);
                 }
                 if (data.collectionType == '1') {
@@ -323,10 +285,7 @@
                 QuestionStr += render(templateQuestionUp, data);
                 QuestionStr += htmlOptionsStr;
                 QuestionStr += render(templateQuestionDown, data);
-                var $question = $('#xuexi-' + questionId).html(QuestionStr);
-                if (window.__is_scan_model) {
-                    $question.find('.my-btn-xuexi-daan').removeAttr('disabled').trigger('click').attr('disabled', 'disabled');
-                }
+                $('#xuexi-' + questionId).html(QuestionStr);
             }
         });
     }
@@ -359,7 +318,7 @@
                         getQuestion(nQuestionId);
                     }
                     $('#xuexi-' + _questionId).hide();
-                    $('#xuexi-' + nQuestionId).fadeIn(500);
+                    $('#xuexi-' + nQuestionId).show();
                     setUpdateStatus($('#xuexi-' + nQuestionId));
                     traceQuestionTab(nQuestionId);
                     traceQuestion(nQuestionId);
@@ -390,7 +349,7 @@
                         getQuestion(nQuestionId);
                     }
                     $('#xuexi-' + _questionId).hide();
-                    $('#xuexi-' + nQuestionId).fadeIn(500);
+                    $('#xuexi-' + nQuestionId).show();
                     setUpdateStatus($('#xuexi-' + nQuestionId));
                     traceQuestionTab(nQuestionId);
                     traceQuestion(nQuestionId);
@@ -468,10 +427,10 @@
             if (userResult == 'true') {
                 //回答正确，显示证明
                 /*$("#xuexi-"+questionId).children().eq(2).append('<img id="xuexi-img-'+questionId+'" src="assets/system/pufa/img/correct.png" style="position: absolute;bottom: 150px;width:30%;height:30%;left:50%;display:none;">');*/
-                $('#xuexi-img-' + questionId).fadeIn(500)
+                $('#xuexi-img-' + questionId).show()
             } else {
                 /*$("#xuexi-"+questionId).children().eq(2).append('<img id="xuexi-img-'+questionId+'" src="assets/system/pufa/img/error.png" style="position: absolute;bottom: 150px;width:30%;height:30%;left:50%;display:none;">');*/
-                $('#xuexi-img-' + questionId).fadeIn(500)
+                $('#xuexi-img-' + questionId).show()
             }
             if (!yes) {
                 _firstOption.attr('checkedAnswer', 'yes');
@@ -647,7 +606,7 @@
         $(ye).siblings().each(function () {
             $(this).hide();
         });
-        $(ye).fadeIn(500);
+        $(ye).show();
         var _dangqianye = $(ye).attr('data-ye');
         $(ye).parent().next().next().children().eq(1).children().eq(0).val(_dangqianye);
     }
@@ -691,7 +650,7 @@ var PANDUANTI_QUESTION = {
         var dangqianye = $this.val();
         if (dangqianye > 0 && dangqianye <= parseInt(suoyouye)) {
             var yes = $this.parent().parent().prev().prev().children();
-            yes.hide().eq(dangqianye - 1).fadeIn(500);
+            yes.hide().eq(dangqianye - 1).show();
         }
 
     }

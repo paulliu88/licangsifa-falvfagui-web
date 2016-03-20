@@ -12,6 +12,7 @@
     <module>bean</module>
     <module>phone</module>
     <module>manage</module>
+    <module>exam</module>
   </modules>
 
   <groupId>com.hzc.licangsifa</groupId>

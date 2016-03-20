@@ -92,4 +92,28 @@ public interface SysUserMapper {
      * @return
      */
     List<SysUserVO> getUserManageList(@Param("sysUserVO") SysUserVO sysUserVO);
+
+    /**
+     * 返回用户
+     * <pre>
+     *     根据idcard和status返回一个用户
+     *     没有该数据返回空
+     * </pre>
+     *
+     * @param idCard
+     * @param status
+     * @return
+     */
+    SysUser selectByStatus(@Param("idCard") String idCard, @Param("status") Integer status);
+    /**
+     * 查询一个用户名在数据库中的数量
+     *
+     * @param phone
+     * @return
+     */
+    Integer selectCountByPhone(String phone);
+
+//    List<SysUser> selectGroupUser();
+
+    List<SysUser> selectGroupUser(@Param("user") SysUser user);
 }

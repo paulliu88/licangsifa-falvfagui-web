@@ -5,6 +5,7 @@
   Time: 10:15
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 </div>
 <!-- /.main-content -->
@@ -338,6 +339,20 @@
     },
     success: function (data) {
 //            alert("操作成功");
+    }
+  });
+
+  /*
+   * 记录用户某一页面滚动条位置，下次打开后自动恢复这一位置
+   */
+  $(function () {
+    var search = window.location.search;
+    $(window).scroll(function () {
+      window.localStorage.setItem('__scrollTop_' + search, $(document).scrollTop());
+    });
+    var scrollTop = window.localStorage.getItem('__scrollTop_' + search);
+    if (scrollTop) {
+      $(document).scrollTop(scrollTop);
     }
   });
 </script>

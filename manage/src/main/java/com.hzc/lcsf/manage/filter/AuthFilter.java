@@ -13,6 +13,7 @@ import java.util.Set;
  */
 public class AuthFilter implements Filter {
     private static final Set<String> EXCLUDE_PAGE = new HashSet<String>();
+
     static {
         EXCLUDE_PAGE.add("login_lp.jsp");
         EXCLUDE_PAGE.add("Ctrl.ajax");

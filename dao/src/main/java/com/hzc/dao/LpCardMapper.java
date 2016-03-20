@@ -35,4 +35,15 @@ public interface LpCardMapper {
     List<LpCard> searchList(@Param("card") LpCard card);
 
     List<UserGradeVo> searchMapList(@Param("card") LpCard card);
+
+    /**
+     * 返回准考证信息
+     * <pre>
+     *     根据userId查询该用户的答题卡
+     * </pre>
+     *
+     * @param userId
+     * @return
+     */
+    LpCard selectByUserId(Integer userId);
 }

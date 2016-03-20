@@ -419,9 +419,13 @@ input[type=checkbox].ace-all + .lbl-all::before {
 }
 
 .widget-header {
-    background: linear-gradient(to bottom, #1687D5 0px, #1687D5 100%) repeat-x scroll 0 0 #1687D5;
     border-color: #1687D5 #1687D5 #1687D5;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1687D5', endColorstr='#1687D5', GradientType=0);
+    background-image: -webkit-linear-gradient(top, #1687D5 0%, #1687D5 100%);
+    background-image: -moz-linear-gradient(top, #1687D5 0%, #1687D5 100%);
+    background-image: -ms-linear-gradient(top, #1687D5 0%, #1687D5 100%);
+    background-image: -o-linear-gradient(top, #1687D5 0%, #1687D5 100%);
+    background-image: linear-gradient(top, #1687D5 0%, #1687D5 100%);
 }
 
 .my-gritter-touming {

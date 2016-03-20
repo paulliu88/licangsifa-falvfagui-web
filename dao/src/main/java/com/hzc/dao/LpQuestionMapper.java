@@ -33,6 +33,7 @@ public interface LpQuestionMapper {
 
     /**
      * 大数据分析用户的错题次数，将做错次数较多的题目优先考试
+     *
      * @param userId
      * @return
      */
@@ -41,7 +42,9 @@ public interface LpQuestionMapper {
 
     /**
      * 根据questionId查询用户的试题
-     * 包括：questionId，答题次数，错误次数，试题类型
+     * <pre>
+     *     包括：questionId，答题次数，错误次数，试题类型
+     * </pre>
      *
      * @param questionId
      * @param userId
@@ -73,4 +76,9 @@ public interface LpQuestionMapper {
      * @return
      */
     List<Map> selectByTypeOptimize(@Param("userId") int userId, @Param("type") String type);
+
+
+    List<LpQuestion> selectGroupQuestions(@Param("question") LpQuestion question);
+
+    int selectMaxseq(@Param("type") String type);
 }

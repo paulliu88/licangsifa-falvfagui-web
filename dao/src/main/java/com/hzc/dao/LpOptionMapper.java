@@ -19,4 +19,13 @@ public interface LpOptionMapper {
     int updateByPrimaryKey(LpOption record);
 
     List<LpOption> selectByQuestionId(@Param("questionId") int questionId);
+
+    /**
+     * 返回选项
+     *
+     * @param questionGroupId 单位id
+     * @return
+     */
+    List<LpOption> selectJuniorOptionList(@Param("questionGroupId") Integer questionGroupId);
+
 }

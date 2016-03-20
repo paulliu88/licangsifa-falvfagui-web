@@ -212,7 +212,7 @@ public class SysUserService {
     /**
      * 青岛司法局 普法教育APP
      * 根据用户身份证号查询用户，如果用户存在，则返回userId；
-     * 用户不存在，则注册此用户，返回userId
+     * 用户不存在，返回userId=0
      *
      * @param account（身份证号）
      * @return
@@ -356,6 +356,12 @@ public class SysUserService {
         return D.sysUserMapper().selectByIdCard(idCard);
     }
 
+    /**
+     * 根据idCard返回数量
+     *
+     * @param idCard
+     * @return
+     */
     public Integer selectUserCountByIdCard(String idCard) {
         return D.sysUserMapper().selectCountByIdCard(idCard);
     }
@@ -370,5 +376,120 @@ public class SysUserService {
     @Transaction(jdbc = TrancationType.CLOSE)
     public List<SysUserVO> getUserManageList(SysUserVO sysUserVO) {
         return D.sysUserMapper().getUserManageList(sysUserVO);
+    }
+
+    /**
+     * 返回用户信息
+     * <pre>
+     *     根据id（sys_user主键）返回该条记录
+     * </pre>
+     *
+     * @param id
+     * @return
+     */
+    public SysUser getUserById(Integer id) {
+        return D.sysUserMapper().selectByPrimaryKey(id);
+    }
+
+    /**
+     * 返回用户
+     * <pre>
+     *     根据idcard和status返回一个用户
+     *     没有该数据返回空
+     * </pre>
+     *
+     * @param idCard
+     * @param status
+     * @return
+     */
+    public SysUser getUserByStatus(String idCard, Integer status) {
+        return D.sysUserMapper().selectByStatus(idCard, status);
+    }
+
+    /**
+     * 返回添加部门组信息结果
+     *
+     * @param sysUser
+     * @return
+     */
+    public ResultVO addSysUser(SysUser sysUser) {
+        int count=saveSysUser(sysUser);
+        if (count==1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回删除考场信息
+     *
+     * @param id
+     * @return
+     */
+    public ResultVO deleteResource(Integer id) {
+        Integer integer = deleteResourceById(id);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回一个考场配置信息
+     *
+     * @return
+     */
+    public SysUser getResource(Integer id) {
+        return D.sysUserMapper().selectByPrimaryKey(id);
+    }
+    /**
+     * 返回考场更新结果
+     *
+     * @param resource
+     * @return
+     */
+    public ResultVO updateResource(SysUser resource) {
+        Integer integer = updateResourceById(resource);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回考场信息更新条数
+     *
+     * @param resource
+     * @return
+     */
+    public Integer updateResourceById(SysUser resource) {
+        return D.sysUserMapper().updateByPrimaryKeySelective(resource);
+    }
+
+    /**
+     * 根据phone返回数量
+     * @param phone
+     * @return
+     */
+    public Integer selectUserCountByPhone(String phone) {
+        return D.sysUserMapper().selectCountByPhone(phone);
+    }
+
+    /**
+     *
+     * @return
+     */
+    @DataTablePager
+    public List<SysUser> ajaxGetUserList(SysUser user) {
+        return D.sysUserMapper().selectGroupUser(user);
+    }
+    /**
+     * 返回删除SysResource的条数
+     *
+     * @param id
+     * @return
+     */
+    private Integer deleteResourceById(Integer id) {
+        return D.sysUserMapper().deleteByPrimaryKey(id);
     }
 }

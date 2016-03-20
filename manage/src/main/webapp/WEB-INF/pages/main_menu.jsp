@@ -14,7 +14,7 @@
     }
   </script>
 
-  <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+  <div class="sidebar-shortcuts" id="sidebar-shortcuts" style="display: none;">
     <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
       <button class="btn btn-success">
         <i class="icon-signal"></i>
@@ -33,7 +33,7 @@
       </button>
     </div>
 
-    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini" style="display: none;">
       <span class="btn btn-success"></span>
 
       <span class="btn btn-info"></span>
@@ -49,13 +49,13 @@
     <%--   ####################################################################################################  --%>
     <li class="active">
       <a href="javascript:void(0);"
-         data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/control_panel.jsp">
+         data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/about.jsp">
         <i class="icon-dashboard"></i>
-        <span class="menu-text"> 控制台 </span>
+        <span class="menu-text">首页</span>
       </a>
     </li>
 
-    <li>
+    <li style="display: none;">
       <a href="javascript:void(0);" data-href="#" class="dropdown-toggle">
         <i class="icon-desktop"></i>
         <span class="menu-text">青岛司法局干部普法APP</span>
@@ -84,14 +84,49 @@
       <ul class="submenu">
         <li>
           <a href="javascript:void(0);"
-             data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/pufa/sys_user.jsp">
+             data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/management/menu_report.jsp">
+            <i class="icon-double-angle-right"></i>
+            报表管理列表
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);"
+             data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/management/ManageSystem/company_main.jsp">
+            <i class="icon-double-angle-right"></i>
+            部门管理列表
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);"
+             data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/management/ManageSystem/user_main.jsp">
             <i class="icon-double-angle-right"></i>
             用户管理列表
           </a>
         </li>
+        <li>
+          <a href="javascript:void(0);"
+             data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/management/ManageSystem/questions_main.jsp">
+            <i class="icon-double-angle-right"></i>
+            题目管理列表
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);"
+             data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/management/ManageSystem/resource_main.jsp">
+            <i class="icon-double-angle-right"></i>
+            考场管理列表
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0);"
+             data-href="${basePath}CommonCtrl.goTo.do?path=/WEB-INF/pages/management/ManageSystem/config_main.jsp">
+            <i class="icon-double-angle-right"></i>
+            考试管理列表
+          </a>
+        </li>
       </ul>
     </li>
-    <li>
+    <li style="display: none;">
       <a href="javascript:void(0);" data-href="#" class="dropdown-toggle">
         <i class="icon-desktop"></i>
         <span class="menu-text"> 托普统考英语管理 </span>
@@ -110,7 +145,7 @@
       </ul>
     </li>
 
-    <li>
+    <li style="display: none;">
       <a href="javascript:void(0);" data-href="#" class="dropdown-toggle">
         <i class="icon-desktop"></i>
         <span class="menu-text"> 托普掌上课堂管理 </span>
@@ -129,7 +164,7 @@
       </ul>
     </li>
 
-    <li>
+    <li style="display: none;">
       <a href="javascript:void(0);" data-href="#" class="dropdown-toggle">
         <i class="icon-list"></i>
         <span class="menu-text"> 托普助学报名系统</span>
@@ -204,13 +239,22 @@
           var parentMenuName = $(this).parents('.open').find('.menu-text').text();
           var itemMenuName = $(this).text();
           $('#navigation-id').find('.active').remove().end().append(
-              '<li class="active">' + parentMenuName + '</li>' +
-              '<li class="active">' + itemMenuName + '</li>');
+                  '<li class="active">' + parentMenuName + '</li>' +
+                  '<li class="active">' + itemMenuName + '</li>');
         });
       }
 
       eventMenuItemClick();
 
     });
+
+    function menu_click(dataHref) {
+      $('#main-content-id').empty().unbind('load').load(dataHref, function (response, status, xhr) {
+        if (status == "error") {
+          var msg = "Sorry but there was an error: ";
+          $("#error").html(msg + xhr.status + " " + xhr.statusText);
+        }
+      });
+    }
   </script>
 </div>

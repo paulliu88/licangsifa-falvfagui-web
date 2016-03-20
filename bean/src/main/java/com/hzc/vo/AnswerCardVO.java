@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Created by LiuJY on 2015/4/29.
- *
+ * <p>
  * 李沧普法系统，学习页的答题卡
  */
 
@@ -31,11 +31,22 @@ public class AnswerCardVO {
 
     private int seq;
 
-    private int categoryCode;
+    private String categoryCode;
 
     private String name;
 
     private String source;
+
+    //用户答题答案
+    private String userAnswer;
+
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
 
     public int getCollectionType() {
         return collectionType;
@@ -61,11 +72,11 @@ public class AnswerCardVO {
         this.seq = seq;
     }
 
-    public int getCategoryCode() {
+    public String getCategoryCode() {
         return categoryCode;
     }
 
-    public void setCategoryCode(int categoryCode) {
+    public void setCategoryCode(String categoryCode) {
         this.categoryCode = categoryCode;
     }
 

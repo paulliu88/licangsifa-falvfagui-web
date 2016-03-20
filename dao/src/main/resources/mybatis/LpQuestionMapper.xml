@@ -11,12 +11,15 @@
     <result column="answer_times" property="answerTimes" jdbcType="INTEGER"/>
     <result column="collect_times" property="collectTimes" jdbcType="INTEGER"/>
   </resultMap>
+    <resultMap id="BaseResultMapVO" type="com.hzc.vo.LpQuestionVO" extends="BaseResultMap">
+        <result column="opione" property="opione" jdbcType="VARCHAR"/>
+    </resultMap>
   <sql id="Base_Column_List">
     id, seq, category_code, material_id, type, name, 
     answer_times, collect_times
   </sql>
   <sql id="Base_Column_List_As">
-        id questionId, seq, category_code category, `type`, `name`, source, answer_times answerTimes, collect_times collectTimes
+        id questionId, seq, category_code category, `type`, `name`,  answer_times answerTimes, collect_times collectTimes
     </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
@@ -31,13 +34,12 @@
   <insert id="insert" parameterType="com.hzc.model.LpQuestion">
     insert into lp_question (id, seq, category_code, 
       material_id, type, name, 
-      knowledge_point, chapter, parser_video_id, 
-      source, answer_times, collect_times
+        parser_video_id,
+       answer_times, collect_times
       )
     values (#{id,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, #{categoryCode,jdbcType=VARCHAR}, 
       #{materialId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{knowledgePoint,jdbcType=VARCHAR}, #{chapter,jdbcType=VARCHAR}, #{parserVideoId,jdbcType=INTEGER}, 
-      #{source,jdbcType=VARCHAR}, #{answerTimes,jdbcType=INTEGER}, #{collectTimes,jdbcType=INTEGER}
+      #{answerTimes,jdbcType=INTEGER}, #{collectTimes,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.hzc.model.LpQuestion">
@@ -113,18 +115,6 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="knowledgePoint != null">
-        knowledge_point = #{knowledgePoint,jdbcType=VARCHAR},
-      </if>
-      <if test="chapter != null">
-        chapter = #{chapter,jdbcType=VARCHAR},
-      </if>
-      <if test="parserVideoId != null">
-        parser_video_id = #{parserVideoId,jdbcType=INTEGER},
-      </if>
-      <if test="source != null">
-        source = #{source,jdbcType=VARCHAR},
-      </if>
       <if test="answerTimes != null">
         answer_times = #{answerTimes,jdbcType=INTEGER},
       </if>
@@ -141,10 +131,6 @@
       material_id = #{materialId,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      knowledge_point = #{knowledgePoint,jdbcType=VARCHAR},
-      chapter = #{chapter,jdbcType=VARCHAR},
-      parser_video_id = #{parserVideoId,jdbcType=INTEGER},
-      source = #{source,jdbcType=VARCHAR},
       answer_times = #{answerTimes,jdbcType=INTEGER},
       collect_times = #{collectTimes,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
@@ -159,8 +145,7 @@
             lq.type,
             laa.update_time updateTime,
             lq.seq seq,
-            lq.category_code categoryCode,
-            lq.source source
+            lq.category_code categoryCode
         from
             lp_question lq
                 left join
@@ -189,7 +174,6 @@
           laa.update_time updateTime,
           lq.seq seq,
           lq.category_code categoryCode,
-          lq.source source
         FROM
           lp_question lq
         LEFT JOIN (
@@ -224,7 +208,6 @@
             lq.seq seq,
             lq.category_code categoryCode,
             lq.name name,
-            lq.source source,
             lc.ctype collectionType
         from
             lp_question lq
@@ -301,5 +284,26 @@
         where
         lpc.type = 1 and lpc.user_id = #{userId}) lc ON lc.question_id = lq.id where lq.type=#{type}
     </select>
-
+    <select id="selectGroupQuestions" parameterType="com.hzc.model.LpQuestion" resultMap="BaseResultMapVO">
+        SELECT
+        *,'查看选项' opione
+        FROM lp_question
+        WHERE seq IS NOT NULL
+        <if test="question.seq != null">
+            AND seq = #{question.seq}
+        </if>
+        <if test="question.type != null">
+            AND type LIKE concat('%',#{question.type},'%')
+        </if>
+        <if test="question.name != null">
+            AND name LIKE concat('%',#{question.name},'%')
+        </if>
+        ORDER BY id DESC
+    </select>
+    <select id="selectMaxseq" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT
+        MAX(seq)
+        FROM lp_question
+        WHERE type = #{type}
+    </select>
 </mapper>

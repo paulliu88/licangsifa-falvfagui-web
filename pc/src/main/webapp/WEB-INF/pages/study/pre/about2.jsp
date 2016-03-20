@@ -51,6 +51,12 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
+    <!--
+      判断IE浏览器版本小于IE8，则直接提示更新。
+    -->
+    <!--[if lte IE 7]>
+    <script>window.location.href = 'http://cdn.dmeng.net/upgrade-your-browser.html?referrer=' + location.href;</script>
+    <![endif]-->
     <!--[if lt IE 9]>
     <script src="/assets/js/html5shiv.js"></script>
     <script src="/assets/js/respond.min.js"></script>
@@ -75,25 +81,13 @@
             text-shadow: 1px 1px 3px #cccccc;
             -webkit-text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #959494 -1px 0 0, #959494 0 -1px 0;
             -moz-text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
-            text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
-            *filter: Glow(Color=#000, Strength=1);
+            text-shadow: 1px  1px  1px rgb(0,0,0,0.1);
+
         }
 
         .my-border-radius {
             border-radius: 20px;
         }
-    </style>
-    <!--[if lte IE 8]>
-    <style>
-        .my-login-btns-for-ie {
-
-        .my-login-btns-for-ie {
-            top: 50px !important;
-        }
-
-    </style>
-    <![endif]-->
-    <style>
         .my-button {
             display: inline-block;
             outline: none;
@@ -123,10 +117,22 @@
 
         .my-button:hover {
             text-decoration: none;
-            color: #ffffff;
+            background-color: #048cb9;
+            transition: all 0.15s ease 0s;
+            color:white!important;
+            border: 3px solid #cccccc;
         }
     </style>
+    <!--[if lte IE 8]>
+    <style>
+        .my-login-btns-for-ie {
 
+        .my-login-btns-for-ie {
+            top: 50px !important;
+        }
+
+    </style>
+    <![endif]-->
 </head>
 
 <body class="login-layout bg">

@@ -59,15 +59,15 @@
             <artifactId>bean</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.hzc</groupId>
-            <artifactId>chuanglan</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.hzc</groupId>-->
+            <!--<artifactId>chuanglan</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
     <build>
-        <finalName>ROOT</finalName>
+        <finalName>pc</finalName>
     </build>
 
 

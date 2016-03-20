@@ -1,8 +1,7 @@
 /**
- * Created by LiuJY on 2015/4/29.
+ * Created by HZC on 2015/4/29.
  */
 (function () {
-
     var answerStartTime = new Date().toLocaleString();
     window.localStorage.setItem('_answerStartTime', answerStartTime);
 
@@ -26,14 +25,13 @@
      */
     function initQuestionCardMoni() {
         var firstQuestionId = 1;
-
         $.ajax({
             type: 'post',
+            data: {type: 1},//1：开卷考试，2：闭卷考试
             url: Routers.pufa.exam.getCardQuestionListForTest,
             success: function (data) {
 
                 firstQuestionId = data[0].questionId;
-
                 var danxuanHtmlStr = '';
                 var panduanHtmlStr = '';
                 var duoxuanHtmlStr = '';
@@ -46,6 +44,10 @@
                 var duoxuanYeshu = 0;
                 for (var i = 0; i < data.length; i++) {
                     var question = data[i];
+                    //用户此题做了，添加做过的样式
+                    if (question.userAnswer) {
+                        question.answer = 'my-btn-tihao-answer';
+                    }
                     question.customIndex = i + 1;
                     if (question.type == '单选题') {
                         var yu = question.questionId % tishu;
@@ -116,7 +118,7 @@
                 traceQuestion(firstQuestionId);
                 traceQuestionTab(firstQuestionId);
             }
-        })
+        });
     }
 
     /**
@@ -131,10 +133,9 @@
                 getQuestion(_questionId);
             }
             $('#moni-question-detail-id').children().hide();
-            $('#moni-' + _questionId).fadeIn(500);
+            $('#moni-' + _questionId).show();
             traceQuestion(_questionId);
             traceQuestionTab(_questionId);
-
         });
     }
 
@@ -161,6 +162,7 @@
 
                 //初始化选项
                 var templateOption = $('#template-moni-option-id').html();
+                var templateOptionChecked = $('#template-moni-option-checked-id').html();
                 var options = data.options;
                 var questiontype = data.type;
                 var _type = 'radio';
@@ -169,41 +171,23 @@
                 data.duoxuandisplay = 'none';
                 if (questiontype == '多选题') {
                     _type = 'checkbox';
-                    //data.type = '多项选择题';
                     data.duoxuandisplay = 'block';
                 } else if (questiontype == '单选题') {
                     data.danxuandisplay = 'block';
-                    //data.type = '单项选择题'
                 } else {
                     data.panduandisplay = 'block';
                 }
 
                 var htmlOptionsStr = '';
+                var userAnswer = data.userAnswer;
                 for (var o = 0; o < options.length; o++) {
                     var option = options[o];
                     option.type = _type;
-                    var label = 'A';
-                    switch (o) {
-                        case 0:
-                            break;
-                        case 1:
-                            label = 'B';
-                            break;
-                        case 2:
-                            label = 'C';
-                            break;
-                        case 3:
-                            label = 'D';
-                            break;
-                        case 4:
-                            label = 'E';
-                            break;
-                        case 5:
-                            label = 'F';
-                            break;
+                    if (userAnswer.indexOf(option.label) < 0) {
+                        htmlOptionsStr += render(templateOption, option);
+                    } else {
+                        htmlOptionsStr += render(templateOptionChecked, option);
                     }
-                    option.label = label;
-                    htmlOptionsStr += render(templateOption, option);
                 }
                 //初始化question
                 var QuestionStr = '';
@@ -235,11 +219,10 @@
                 if (exist == 0) {
                     getQuestion(nQuestionId);
                 }
-                $('#moni-' + _questionId).hide().prev().fadeIn(500);
+                $('#moni-' + _questionId).hide().prev().show();
                 traceQuestion(nQuestionId);
                 traceQuestionTab(nQuestionId);
             }
-
         });
         $('#moni-question-detail-id').delegate('.my-btn-moni-question-next', 'click', function () {
             var _questionId = $(this).attr('data-question-id');
@@ -252,21 +235,10 @@
                 if (exist == 0) {
                     getQuestion(nQuestionId);
                 }
-                $('#moni-' + _questionId).hide().next().fadeIn(500);
+                $('#moni-' + _questionId).hide().next().show();
                 traceQuestion(nQuestionId);
                 traceQuestionTab(nQuestionId);
             }
-        });
-    }
-
-    /**
-     * 注册查看答案事件
-     */
-    function eventSeeAnswerMoni() {
-        $('#moni-question-detail-id').delegate('.my-btn-moni-daan', 'click', function () {
-            var _questionId = $(this).attr('data-question-id');
-            judgeAnswer(_questionId);
-
         });
     }
 
@@ -341,56 +313,23 @@
      */
     function submitHandler(isAutoSubmit) {
         var zuoWan = 0;//用户做题题数
-        judgeCurrentQuestionAnswer();
         var testPreMsgTemplate = $('#template-test-result-id').html();
-
         var _questions = $('#moni-question-detail-id').children();
-
-        var fsPandt = 0, fsDanxt = 0, fsDuoxt = 0;
-
-
         for (var h = 0; h < _questions.length; h++) {
             var $_question = $(_questions[h]);
             var ua = $_question.prop('userAnswerStr');
-            var qa = $_question.prop('questionAnswerStr');
-            var ur = $_question.prop('userResult');
-            var qi = $_question.attr('data-question-id');
-            var qt = $_question.attr('data-question-type');
             if (ua) {
                 zuoWan += 1;
-                if (ur=='true') {
-                    if (qt == '判断题') {
-                        fsPandt += 1;
-                    } else if (qt == '单选题') {
-                        fsDanxt += 1;
-                    } else if (qt == '多选题') {
-                        fsDuoxt += 2;
-                    }
-                }
             }
         }
-
-        var zongFenShu = fsPandt + fsDanxt + fsDuoxt;
-
-        var htmlStr = render(testPreMsgTemplate, {
-            summary: zongFenShu > 80 ? "及格" : "不及格",
-            myUseTime: window._fen_zhong ? window._fen_zhong : 0,
-            zongFenShu: zongFenShu,
-            fsPandt: fsPandt,
-            fsDanxt: fsDanxt,
-            fsDuoxt: fsDuoxt
-        });
-
+        var score = '';
         var msg = '';
-        var gritter = true;
-        if (zongFenShu >= 80) {
-            msg = '<span style="margin-left: 122px;font-size: 1.3em;">恭喜</span></br>您已完成干部法律法规测试</br>您的成绩是' + zongFenShu + '分';
+        if (score >= 80) {
+            msg = '<span style="margin-left: 122px;font-size: 1.3em;">恭喜</span></br>您已完成干部法律法规测试</br>您的成绩是' + score + '分';
         } else {
-            gritter = false;
-            msg = '您已完成干部法律法规测试</br>您的成绩是' + zongFenShu + '分</br>请继续努力哦';
+            msg = '您已完成干部法律法规测试</br>您的成绩是' + score + '分</br>请继续努力哦';
         }
-
-        htmlStr = render(testPreMsgTemplate, {
+        var htmlStr = render(testPreMsgTemplate, {
             msg: msg
         });
         var resumtMsg = '';
@@ -400,6 +339,7 @@
             resumtMsg = '<span style="">题还没有做完，您确定要提交吗？</span>';
         }
         if (isAutoSubmit) { // 点击“交卷”按钮则提示确认，否则直接交卷
+            // TODO 如果是自动交卷，则不应该再显示一个用户确认窗口。应该直接显示一个3秒到5秒的倒计时，倒计时结束后应该自动交卷（用户无法取消）
             bootbox.confirm({
                 buttons: {
                     confirm: {
@@ -422,104 +362,12 @@
         } else {
             queRenResult();
         }
+        /**
+         * 提交考试，然后显示考试结果
+         */
         function queRenResult() {
-
-            // 试卷相关信息
-            var hisPaper = {
-                score: zongFenShu,
-                answerStartTime: window.localStorage.getItem('_answerStartTime'),
-                answerEndTime: new Date(),
-                type: '1' // 1：线上开卷考试；2：现场闭卷考试；
-            };
-            var hisPaperStr = JSON.stringify(hisPaper);
-
-            // 考试过程中每道题的记录
-            var hisPaperItems = [];
-
-            for (var h = 0; h < _questions.length; h++) {
-                var $_question = $(_questions[h]);
-                var answer = $_question.prop('userAnswerStr');
-                var key = $_question.prop('questionAnswerStr');
-                var ur = $_question.prop('userResult');
-                var answerTime = $_question.prop('questionAnswerTime');
-                var seq = $_question.attr('data-question-id');
-
-                //
-                hisPaperItems.push({
-                    seq: seq,
-                    key: key,
-                    answer: answer,
-                    answerTime: answerTime
-                });
-
-                var qt = $_question.attr('data-question-type');
-                if (answer) {
-                    zuoWan += 1;
-                    if (ur == 'true') {
-                        if (qt == '判断题') {
-                            fsPandt += 1;
-                        } else if (qt == '单选题') {
-                            fsDanxt += 1;
-                        } else if (qt == '多选题') {
-                            fsDuoxt += 2;
-                        }
-                    }
-                }
-            }
-
-            var hisPaperItemsStr = JSON.stringify(hisPaperItems);
-
-            $.ajax({
-                url: Routers.pufa.exam.saveErrors,
-                type: "POST",
-                data: {
-                    hisPaperStr: hisPaperStr,
-                    hisPaperItemsStr: hisPaperItemsStr
-                },
-                success: function () {
-                }
-            });
-
-            setTimeout(function () {
-                return;
-                if (gritter) {
-                    $.gritter.add({
-                        title: '',
-                        text: '<img src="assets/system/pufa/img/gif/80-100.gif">',
-                        class_name: 'gritter-center my-gritter-touming'
-                    });
-                } else {
-                    $.gritter.add({
-                        title: '',
-                        text: '<img src="assets/system/pufa/img/gif/60.gif">',
-                        class_name: 'gritter-center my-gritter-touming'
-                    });
-                }
-            }, 2000);
-            bootbox.confirm({
-                buttons: {
-                    confirm: {
-                        label: '确认'
-                    },
-                    cancel: {
-                        label: '取消'
-                    }
-                },
-                message: htmlStr,
-                callback: function (result) {
-                    if (result) {
-                        //window.__canJumpOtherCard = true; // 可以跳出模拟考试区域
-                        window.localStorage.setItem('__canJumpOtherCard', 'true');
-                        clearInterval(window._myTestIter);
-                        // FIXME 重置  模拟考  标签页
-                        //window.location.reload();
-                        window.location.replace('CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/exam_pre.jsp');
-                        //reInitForTest();
-                    } else {
-                    }
-                },
-                title: "模拟考试结果："
-            });
+            $(window).unbind('beforeunload');//如果是要交卷，则不应该再显示离开本页面的确认框，so，取消卸载页面的事件绑定。
+            window.location.replace('LpExamCtrl.saveExam.do');
         }
     }
 
@@ -602,34 +450,62 @@
     function eventShengYuTime() {
         var iter2 = window.setInterval(function () {
             window.__second -= 1;
+            if (window.__second < 0) {
+                return;
+            }
             $('#my-shengyu-time-id').text(window.__second);
         }, 1000);
         var iter = window.setInterval(function () {
-            window.__second = 60;
+            window.__second = 59;
             window.__minutes -= 1;
-            if (!window.__minutes) { // 提交试卷
-                window.clearInterval(iter);
+            if (window.__minutes == 0) { // 提交试卷
                 window.clearInterval(iter2);
+                window.clearInterval(iter);
                 submitHandler(false);
             }
             $('#my-shengyu-hours-id').text(window.__minutes);
         }, 1000 * 60);
     }
 
+    /**
+     * 保存答题内容
+     */
+    function saveAnswer() {
+        $('#moni-question-detail-id').delegate('input', 'click', function () {
+            var _$optionDiv = $(this).parent().parent();
+            var _$questionDiv = _$optionDiv.parent();
+            var questionId = _$questionDiv.attr('data-question-id');
+            var options = _$optionDiv.children().children('input:checked');
+            var userAnswer = '';
+            $.each(options, function (i, n) {
+                userAnswer += $(n).parent().attr('data-label');
+            });
+            $.ajax({
+                type: 'POST',
+                url: Routers.pufa.exam.saveUserAnswer,
+                data: {questionId: questionId, userAnswer: userAnswer},
+                success: function (data) {
+                },
+                error: function () {
+                    alert('系统错误，请联系管理员');
+                }
+            })
+        })
+    }
+
     var reInitForTest = function () {
         initQuestionCardMoni();
         eventQuestionClickMoni();
         eventMoniQuestionChangeMoni();
-        eventSeeAnswerMoni();
         eventSubmitExamBtn();
         eventQieTi();
         eventShengYuTime();
+        saveAnswer();
     };
 
     var tishu = 100;//每页题数
     $(function () {
         reInitForTest();
     });
-
 })();
 

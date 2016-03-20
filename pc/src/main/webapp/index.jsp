@@ -43,6 +43,14 @@
   <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
   <![endif]-->
 
+
+  <!--
+    判断IE浏览器版本小于IE8，则直接提示更新。
+  -->
+  <!--[if lte IE 7]>
+  <script>window.location.href = 'http://cdn.dmeng.net/upgrade-your-browser.html?referrer=' + location.href;</script>
+  <![endif]-->
+
   <!-- inline styles related to this page -->
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

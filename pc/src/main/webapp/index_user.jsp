@@ -52,6 +52,12 @@
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
+  <!--
+    判断IE浏览器版本小于IE8，则直接提示更新。
+  -->
+  <!--[if lte IE 7]>
+  <script>window.location.href = 'http://cdn.dmeng.net/upgrade-your-browser.html?referrer=' + location.href;</script>
+  <![endif]-->
   <!--[if lt IE 9]>
   <script src="assets/js/html5shiv.js"></script>
   <script src="assets/js/respond.min.js"></script>
@@ -65,7 +71,6 @@
       background-size: 100% 100%;
       background-color: #1687d5;
     }
-
     .my-button {
       width: 170px;
       height: 40px;
@@ -80,16 +85,25 @@
       font-family: "Microsoft YaHei";
       letter-spacing: 0.3em !important;
     }
-
+    .my-button:hover{
+       border: 1px solid #cccccc!important;
+        }
     .my-button-join {
       width: 100px;
       height: 35px;
       color: white;
       text-align: center;
-      background: #428bca;
+      background: #12a5eb;
+      transition: all 0.15s ease 0s;
       font-weight: 800;
       /*float: right;*/
       border-radius: 5px;
+    }
+
+    .my-button-join:hover {
+      text-decoration: none;
+      background-color: #048cb9!important;
+      border: 1px solid #005aa7;
     }
 
     .my-title-font {
@@ -102,7 +116,7 @@
       text-shadow: 1px 1px 3px #cccccc;
       -webkit-text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #959494 -1px 0 0, #959494 0 -1px 0;
       -moz-text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
-      text-shadow: #ccc 1px 0 0, #ccc 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+      text-shadow: 1px  1px  1px rgb(0,0,0,0.1);
       *filter: Glow(Color=#000, Strength=1);
     }
 
@@ -117,9 +131,8 @@
     .my-login-btns-for-ie {
       top: 50px !important;
     }
-  </style>
+   </style>
   <![endif]-->
-
 </head>
 
 <body class="login-layout bg">
@@ -140,7 +153,7 @@
           <div class="widget-main my-border-radius">
             <%--<div class="row" style="height: 100px;"></div>--%>
             <div id="login-form-id" class="row" style="height: 260px !important;display: block;">
-              <div class="col-xs-6">
+              <div class="col-xs-7">
                 <h4 class="header blue lighter bigger" style="font-weight: 800;">
                   <img src="${basepath}assets/system/pufa/img/logo-user.png"
                        style="width:22px;height:auto;margin-top: -5px;">
@@ -154,7 +167,7 @@
                       onsubmit="return validate(this);"
                       style="padding: 0px 40px 10px 0px !important;border-right: 1px solid lightgray;margin-right: -10px;">
                   <fieldset>
-                    <div style="margin-bottom: 10px;font-size: 15px;font-weight: bold;">
+                    <div style="margin-bottom: 15px;margin-top:10px;font-size: 15px;font-weight: bold;">
                       身份证号码：
                     </div>
                     <label class="block clearfix" style="margin-top: 15px !important;">
@@ -162,25 +175,23 @@
 															<input id="idCard" name="username" type="text"
                                      class="form-control"
                                      placeholder="请输入您的身份证号"/>
-															<i class="icon-user"></i>
+															<%--<i class="icon-user"></i>--%>
 														</span>
                     </label>
 
-                    <div id="login-message-id" style="color: red;text-align: center;height: 15px;"></div>
+                    <div id="login-message-id" style="color: red;text-align: center;height: 1px;"></div>
                     <div class="clearfix"
-                         style="margin-top: 25px !important;text-align: center;">
+                         style="margin-top: 20px !important;text-align: right;">
                       <%--<label class="inline" style="display: none;">--%>
                       <%--<input id="remember-me-id" type="checkbox" class="ace"/>--%>
                       <%--<span class="lbl"> 记住我</span>--%>
                       <%--</label>--%>
                       <button id="submit-btn-id" type="submit"
-                              class="my-button-join btn-info"
-                              style="background-color: #2490D7!important;">
+                              class="my-button-join">
                         登&nbsp;&nbsp;录
                       </button>
                       <button id="enroll-btn-id" type="button" onclick="nextStep()"
-                              class="my-button-join btn-info"
-                              style="background-color: #2490D7!important;">
+                              class="my-button-join">
                         注&nbsp;&nbsp;册
                       </button>
                     </div>
@@ -189,12 +200,12 @@
                   </fieldset>
                 </form>
               </div>
-              <div class="col-xs-6">
+              <div class="col-xs-5">
                 <h4 class="header blue lighter bigger" style="font-weight: 800;">
                   <img src="${basepath}assets/system/pufa/img/logo-shaomiao.png"
                        style="width:22px;height:auto;margin-top: 0px;">
                   <%--<i class="icon-group blue"></i>--%>
-                  请扫描二维码直接下载安装
+                  请扫描二维码下载安装
                 </h4>
 
                 <div class="space-6"></div>
@@ -209,9 +220,8 @@
                          style="width: 100%;">
                   </div>
                   -->
-                  <div class="col-xs-3"></div>
-                  <div class="col-xs-6" style="text-align: center;">
-                    手机端扫描下载:</br>
+                  <div class="col-xs-2"></div>
+                  <div class="col-xs-8" style="text-align: center;">
                     <img src="assets/system/pufa/img/erweima/licangsifa.png"
                          style="width: 100%;">
                   </div>
@@ -288,13 +298,11 @@
                     <div class="clearfix"
                          style="margin-top: 25px !important;text-align: center;">
                       <button type="button" onclick="prevStep()"
-                              class="my-button-join btn-info"
-                              style="background-color: #2490D7!important;">
+                              class="my-button-join" >
                         返&nbsp;&nbsp;回
                       </button>
                       <button type="button" onclick="enroll()"
-                              class="my-button-join btn-info"
-                              style="background-color: #2490D7!important;">
+                              class="my-button-join">
                         注&nbsp;&nbsp;册
                       </button>
                     </div>
@@ -311,37 +319,37 @@
       <div class="center position-relative my-login-btns-for-ie"
            style="position: relative!important;padding-top: 50px;">
         <div class="row">
-          <div class="col-xs-3">
-            <a class="btn my-button
-            disabled" href="javascript:;">
-              <%--" href="CommonCtrl.goWithCompanyJsp.do?path=/WEB-INF/pages/enrollment/sign.jsp">--%>
+          <div class="col-xs-4">
+            <a  class="btn btn-primary my-button
+                       <%--disabled" href="javascript:;">--%>
+              " href="CommonCtrl.goWithCompanyJsp.do?path=/WEB-INF/pages/enrollment/sign.jsp">
               网上报名
             </a>
           </div>
-          <div class="col-xs-3">
+          <div class="col-xs-4">
             <!--== href="CommonCtrl.goTo.do?path=/WEB-INF/pages/card/print_card.jsp;"-->
-            <a class="btn my-button
-            disabled" href="javascript:;">
-              <%--" href="CommonCtrl.goWithCompanyJsp.do?path=/WEB-INF/pages/card/print_card.jsp">--%>
+            <a class="btn btn-primary my-button
+            <%--disabled" href="javascript:;">--%>
+              " href="CommonCtrl.goWithCompanyJsp.do?path=/WEB-INF/pages/card/print_card.jsp">
               打印准考证
             </a>
           </div>
-          <div class="col-xs-3">
+          <div class="col-xs-4">
             <%--href="javascript:openForFullScreen('CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/login.jsp');">--%>
-            <a class="btn my-button
-            disabled" href="javascript:void(0);">
-              <%--" href="CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/login.jsp">--%>
+            <a class="btn btn-primary my-button
+            <%--disabled" href="javascript:void(0);">--%>
+              " href="CommonCtrl.goTo.do?path=/WEB-INF/pages/exam/login.jsp">
               网上考试
             </a>
           </div>
-          <div class="col-xs-3">
+          <%--<div class="col-xs-3">--%>
             <!--
                  href="CommonCtrl.goTo.do?path=/WEB-INF/pages/management/menu.jsp;" -->
-            <a class="btn my-button
-            disabled" href="javascript:;">
+            <%--<a class="btn btn-primary my-button--%>
+            <%--disabled" href="javascript:;">--%>
               <%--" href="CommonCtrl.goTo.do?path=/WEB-INF/pages/management/menu.jsp">--%>
-              考试管理
-            </a>
+              <%--考试管理--%>
+            <%--</a>--%>
           </div>
         </div>
       </div>
@@ -401,8 +409,9 @@
     margin-top: 5px;
     padding: 3px 2px 0px 2px;
   }
-  .modal-dialog{
-    padding-top:10%;
+
+  .modal-dialog {
+    padding-top: 10%;
   }
 </style>
 <!-- inline scripts related to this page -->
@@ -479,10 +488,10 @@
           }
         }
         html += '<div id="addCompany" style="margin-top: 10px;border-top:1px solid;">' +
-                '<div>如果依然没有，请手动添加：</div><input id="newCompany" type="text">' +
-                '<button type="button" onclick="addSelfCompany();" class="my-button-join btn-info" style="height: 28px;width:60px;margin:0 10px;">添加</button>' +
-                '<span id="companyMess" style="color:red;"><span>' +
-                '</div>';
+            '<div>如果依然没有，请手动添加：</div><input id="newCompany" type="text">' +
+            '<button type="button" onclick="addSelfCompany();" class="my-button-join btn-info" style="height: 28px;width:60px;margin:0 10px;">添加</button>' +
+            '<span id="companyMess" style="color:red;"><span>' +
+            '</div>';
         bootbox.dialog({
           message: html
         });
@@ -569,6 +578,20 @@
       idCardDom.focus();
       return false;
     }
+
+    try {
+      window.localStorage.setItem('__idCard', idCard);
+    } catch (e) {
+    }
+  }
+
+  // 如果已经登录过，则显示上次登录的身份证号码
+  try {
+    var ID_CARD = window.localStorage.getItem('__idCard');
+    if (ID_CARD) {
+      $('#idCard').val(ID_CARD);
+    }
+  } catch (e) {
   }
 
   //下面代码实现全屏显示

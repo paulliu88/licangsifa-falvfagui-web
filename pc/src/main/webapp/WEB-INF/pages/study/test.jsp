@@ -181,12 +181,6 @@
                 <span style="display: {duoxuandisplay}">
                     {type}（下列各题，有两个或两个以上正确答案，每题2分，共20题。少选、多选或错选均不得分。）
                 </span>
-
-            <div style="display: none;">
-                <input type="checkbox" class="ace ace-checkbox-2" name="form-field-checkbox"
-                       data-question-id="{questionId}" onclick="eventBiaoji(this);">
-                <span class="lbl" style="color: #445566">标记</span>
-            </div>
         </label>
             <span id="moni-question-time-{questionId}" class="label label-lg arrowed-in pull-right my-label-info"
                   style="display: none;">已做<span>{answerTime}</span>次

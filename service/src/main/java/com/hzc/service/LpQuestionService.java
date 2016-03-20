@@ -1,6 +1,7 @@
 package com.hzc.service;
 
 import com.hzc.factory.alias.D;
+import com.hzc.framework.ssh.repository.mybatis.DataTablePager;
 import com.hzc.framework.ssh.service.TrancationType;
 import com.hzc.framework.ssh.service.Transaction;
 import com.hzc.model.HisAnswer;
@@ -9,10 +10,12 @@ import com.hzc.model.LpOption;
 import com.hzc.model.LpQuestion;
 import com.hzc.vo.AnswerCardVO;
 import com.hzc.vo.QuestionVO;
+import com.hzc.vo.ResultVO;
 import com.hzc.vo.UserAnswerVO;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -23,6 +26,8 @@ import java.util.*;
  */
 @Transaction(jdbc = TrancationType.CLOSE)
 public class LpQuestionService {
+
+    private static Logger log = Logger.getLogger(LpQuestionService.class);
 
     /**
      * 根据userId
@@ -260,9 +265,9 @@ public class LpQuestionService {
      * @param answer
      */
     public void saveAndUpdateUserAnswer(HisAnswer answer) {
+//        log.error("hzcerror:save answerTimes and save errorTimes");
         Integer userId = answer.getUserId();
         Integer questionId = answer.getQuestionId();
-        System.out.println(questionId);
         HisAnswer hisAnswer = selectLpAnswerByUserIdAndQuestionId(userId, questionId);
         if (null != hisAnswer) {
             updateUserAnserInfo(answer);
@@ -459,6 +464,7 @@ public class LpQuestionService {
      * @param userId
      */
     public void saveErrors(String data, int userId) {
+//        log.error("hzcerror:saveErrors for test");
         JSONArray jsonArray = JSONArray.fromObject(data);
         Object[] array = jsonArray.toArray();
         UserAnswerVO userAnswerVO = new UserAnswerVO();
@@ -486,6 +492,7 @@ public class LpQuestionService {
      */
     @Transaction(jdbc = TrancationType.OPEN)
     public void saveStyTimes(HisAnswer answer) {
+//        log.error("hzcerror:add styTimes for test");
         Integer userId = answer.getUserId();
         Integer questionId = answer.getQuestionId();
         HisAnswer hisAnswer = selectLpAnswerByUserIdAndQuestionId(userId, questionId);
@@ -526,6 +533,181 @@ public class LpQuestionService {
             saveUserAnswer(answer);
         }
     }
+    /**
+     *
+     * @return
+     */
+    @DataTablePager
+    public List<LpQuestion> ajaxGetQuestionsList(LpQuestion question) {
+        return D.lpQuestionMapper().selectGroupQuestions(question);
+    }
+    /**
+     * 返回删除试题信息
+     *
+     * @param id
+     * @return
+     */
+    public ResultVO deleteResource(Integer id) {
+        Integer integer = deleteResourceById(id);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回删除SysResource的条数
+     *
+     * @param id
+     * @return
+     */
+    private Integer deleteResourceById(Integer id) {
+        return D.lpQuestionMapper().deleteByPrimaryKey(id);
+    }
+    /**
+     * 返回添加试题信息结果
+     *
+     * @param question
+     * @return
+     */
+    public ResultVO addLpQuestion(LpQuestion question) {
+        int count=saveQuestion(question);
+        if (count==1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 保存试题信息
+     *
+     * @param question
+     * @return
+     */
+    @Transaction(jdbc = TrancationType.OPEN)
+    public int saveQuestion(LpQuestion question) {
+        return D.lpQuestionMapper().insertSelective(question);
+    }
 
+    public int selectMaxseq(String type){
+        return D.lpQuestionMapper().selectMaxseq(type);
+    }
+    /**
+     * 返回一个试题信息
+     *
+     * @return
+     */
+    public LpQuestion getResource(Integer id) {
+        return D.lpQuestionMapper().selectByPrimaryKey(id);
+    }
+    /**
+     * 返回试题更新结果
+     *
+     * @param resource
+     * @return
+     */
+    public ResultVO updateResource(LpQuestion resource) {
+        Integer integer = updateResourceById(resource);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回试题信息更新条数
+     *
+     * @param resource
+     * @return
+     */
+    public Integer updateResourceById(LpQuestion resource) {
+        return D.lpQuestionMapper().updateByPrimaryKeySelective(resource);
+    }
+    /**
+     * 返回试题的选项
+     * @param qid 单位的父id
+     * @return
+     */
+    @DataTablePager
+    public List<LpOption> getJuniorQuestionList(Integer qid) {
+        return D.lpOptionMapper().selectJuniorOptionList(qid);
+    }
+    /**
+     * 返回添加试题选项结果
+     *
+     * @param option
+     * @return
+     */
+    public ResultVO AddOption(LpOption option) {
+        Integer integer = insertOptionGroup(option);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回添加选项条数
+     *
+     * @param group
+     * @return
+     */
+    private Integer insertOptionGroup(LpOption group) {
+        return D.lpOptionMapper().insertSelective(group);
+    }
+    /**
+     * 返回删除试题下的选项信息
+     *
+     * @param id
+     * @return
+     */
+    public ResultVO deleteOptio(Integer id) {
+        Integer integer = deleteOptionById(id);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回删除选项的条数
+     *
+     * @param id
+     * @return
+     */
+    private Integer deleteOptionById(Integer id) {
+        return D.lpOptionMapper().deleteByPrimaryKey(id);
+    }
+    /**
+     * 返回一个选项信息
+     *
+     * @return
+     */
+    public LpOption getOption(Integer id) {
+        return D.lpOptionMapper().selectByPrimaryKey(id);
+    }
+    /**
+     * 返回选项更新结果
+     *
+     * @param resource
+     * @return
+     */
+    public ResultVO updateOption(LpOption resource) {
+        Integer integer = updateOptionById(resource);
+        if (integer == 1) {
+            return new ResultVO(Boolean.TRUE, "成功");
+        } else {
+            return new ResultVO(Boolean.FALSE, "失败");
+        }
+    }
+    /**
+     * 返回选项更新条数
+     *
+     * @param resource
+     * @return
+     */
+    public Integer updateOptionById(LpOption resource) {
+        return D.lpOptionMapper().updateByPrimaryKeySelective(resource);
+    }
 
 }

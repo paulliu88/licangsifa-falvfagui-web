@@ -21,10 +21,10 @@ public class MySecurity {
 
     private static int[] decode;
 
-    private static int[] Polynomials31 = { 0x40c6e78f, 0x44ea7b19, 0x45da25ce, 0x470c368e, 0x4920f4c1, 0x4a2fb865, 0x4b641875, 0x4d474412,
-        0x4c175700, 0x4e880047, 0x50a5894c, 0x51ae3883, 0x531df126, 0x563e62e8, 0x586801c2, 0x5bef4706, 0x5c14c48a, 0x5d06e2a7, 0x5f2f8a72,
-        0x623311d9, 0x65616f52, 0x668043b4, 0x672161c9, 0x67f0a6a8, 0x6814750f, 0x6c4920c3, 0x6dca541b, 0x6e97e1ed, 0x70963ac8, 0x72de5f24,
-        0x7411688a, 0x7502196b, 0x76202331, 0x7887a9e1, 0x790621f4, 0x7e79deae, 0x7faca450 };
+    private static int[] Polynomials31 = {0x40c6e78f, 0x44ea7b19, 0x45da25ce, 0x470c368e, 0x4920f4c1, 0x4a2fb865, 0x4b641875, 0x4d474412,
+            0x4c175700, 0x4e880047, 0x50a5894c, 0x51ae3883, 0x531df126, 0x563e62e8, 0x586801c2, 0x5bef4706, 0x5c14c48a, 0x5d06e2a7, 0x5f2f8a72,
+            0x623311d9, 0x65616f52, 0x668043b4, 0x672161c9, 0x67f0a6a8, 0x6814750f, 0x6c4920c3, 0x6dca541b, 0x6e97e1ed, 0x70963ac8, 0x72de5f24,
+            0x7411688a, 0x7502196b, 0x76202331, 0x7887a9e1, 0x790621f4, 0x7e79deae, 0x7faca450};
 
     private static int State31;
     private static int Polynom31;
@@ -143,7 +143,7 @@ public class MySecurity {
             char b3 = (i + 2 < lng) ? str.charAt(i + 2) : 0;
             char b4 = (i + 3 < lng) ? str.charAt(i + 3) : 0;
             int triplet =
-                ((decode[b1] << 18) & 0xffffff) | ((decode[b2] << 12) & 0x3ffff) | ((decode[b3] << 6) & 0xfff) | ((decode[b4]) & 0x3f);
+                    ((decode[b1] << 18) & 0xffffff) | ((decode[b2] << 12) & 0x3ffff) | ((decode[b3] << 6) & 0xfff) | ((decode[b4]) & 0x3f);
             arr[index++] = (triplet >> 16) & 0xff;
             if (b3 != 0)
                 arr[index++] = (triplet >> 8) & 0xff;
@@ -475,7 +475,7 @@ public class MySecurity {
     public static String getRandomString() {
         int lnum1 = (int) (100000 * Math.random());
         int lnum2 = (int) (100000 * Math.random());
-        String[] arry = { "n", "_", "p", "7", "K", "s", "e", "w", "1", "Z" };
+        String[] arry = {"n", "_", "p", "7", "K", "s", "e", "w", "1", "Z"};
         String str = String.valueOf(lnum2);
         String temp = "";
         int index = 0;
@@ -492,11 +492,11 @@ public class MySecurity {
         int lnum1 = (int) (1000000000 * Math.random());
         int lnum2 = (int) (1000000000 * Math.random());
         String[][] arry =
-            { { "0", "_", "p", "7", "K", "s", "e", "w", "1", "f" }, { "1", "A", "q", "t", "9", "u", "b", "x", "a", "g" },
-                { "2", "f", "j", "3", "V", "B", "n", "l", "r", "e" }, { "3", "z", "s", "F", "g", "I", "o", "y", "c", "Z" },
-                { "4", "M", "d", "T", "6", "_", "k", "r", "L", "q" }, { "5", "h", "J", "w", "r", "Q", "x", "s", "_", "j" },
-                { "6", "N", "v", "g", "o", "R", "a", "2", "m", "D" }, { "7", "x", "H", "p", "i", "D", "z", "l", "o", "a" },
-                { "8", "v", "Z", "4", "_", "e", "g", "q", "n", "W" }, { "9", "C", "_", "v", "E", "w", "k", "s", "H", "Z" } };
+                {{"0", "_", "p", "7", "K", "s", "e", "w", "1", "f"}, {"1", "A", "q", "t", "9", "u", "b", "x", "a", "g"},
+                        {"2", "f", "j", "3", "V", "B", "n", "l", "r", "e"}, {"3", "z", "s", "F", "g", "I", "o", "y", "c", "Z"},
+                        {"4", "M", "d", "T", "6", "_", "k", "r", "L", "q"}, {"5", "h", "J", "w", "r", "Q", "x", "s", "_", "j"},
+                        {"6", "N", "v", "g", "o", "R", "a", "2", "m", "D"}, {"7", "x", "H", "p", "i", "D", "z", "l", "o", "a"},
+                        {"8", "v", "Z", "4", "_", "e", "g", "q", "n", "W"}, {"9", "C", "_", "v", "E", "w", "k", "s", "H", "Z"}};
         String str = String.valueOf(lnum1);
         String temp = "";
         int index = 0;

@@ -120,4 +120,17 @@
         FROM
         sys_resource
     </select>
+    <select id="getOrderBy" resultType="com.hzc.model.SysResource">
+        SELECT
+        room_no roomNo,
+        id id,
+        start_time startTime,
+        end_time endTime,
+        room_address roomAddress,
+        seat_count seatCount,
+        update_time updateTime
+        FROM
+        sys_resource
+        ORDER BY ${roomNo} ${desc}
+    </select>
 </mapper>

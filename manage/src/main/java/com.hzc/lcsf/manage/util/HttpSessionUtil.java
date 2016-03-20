@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * Created by HZC on 2015/4/29.
- * <p/>
+ * <p>
  * 记录session中的变量
  */
 public class HttpSessionUtil {

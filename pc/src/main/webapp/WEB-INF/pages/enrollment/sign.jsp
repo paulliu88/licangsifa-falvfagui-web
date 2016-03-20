@@ -78,7 +78,7 @@
                     <div class="col-sm-7">
                       <input name="userName" id="userName" type="text"
                              class="col-xs-10 col-sm-10"
-                      <%--value="12"--%>
+                             value="刘金云"
                              style="border:1px solid #1687d5;">
                     </div>
                   </div>
@@ -91,7 +91,7 @@
                       <input name="birthday" id="birthday" type="text"
                              style="border:1px solid #1687d5;"
                              class="col-xs-10 col-sm-10"
-                      <%--value="2015-05-10"--%>
+                             value="2015-05-10"
                              onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
                     </div>
                   </div>
@@ -163,7 +163,7 @@
                     <div class="col-sm-7">
                       <input type="text" name="idCard" id="idCard"
                              class="col-xs-10 col-sm-10"
-                      <%--value="123456789123456789"--%>
+                             value="123456789123456789"
                              style="border:1px solid #1687d5;">
                     </div>
                   </div>
@@ -176,7 +176,7 @@
                     <div class="col-sm-7">
                       <input type="text" name="phone" id="phone"
                              class="col-xs-10 col-sm-10"
-                      <%--value="12345679812"--%>
+                             value="12345679812"
                              style="border:1px solid #1687d5;">
                     </div>
                   </div>
@@ -425,7 +425,7 @@
     $('#sex2').html(sex);
     var jobGrade = $('#jobGrade').val();
     $('#jobGrade2').html(jobGrade);
-    $('#company2').html($('#companyId').html());
+    $('#company2').html($('#company').find("option:selected").text());
     if (yes) {
       $('#my-form').hide();
       $('#my-div').show();

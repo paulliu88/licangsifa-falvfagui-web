@@ -24,6 +24,10 @@ public class HisPaperItem {
 
     private String optionD;
 
+    private String optionE;
+
+    private String optionF;
+
     private String key;
 
     private String answer;
@@ -37,6 +41,22 @@ public class HisPaperItem {
     private Integer deleted;
 
     private Integer paperId;
+
+    public String getOptionE() {
+        return optionE;
+    }
+
+    public void setOptionE(String optionE) {
+        this.optionE = optionE;
+    }
+
+    public String getOptionF() {
+        return optionF;
+    }
+
+    public void setOptionF(String optionF) {
+        this.optionF = optionF;
+    }
 
     public Integer getId() {
         return id;

@@ -1,5 +1,6 @@
 package com.hzc.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -20,6 +21,13 @@ public class SysResource {
 
     private Date updateTime;
 
+    private String startTimeStr;
+
+    private String endTimeStr;
+
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
     public Integer getId() {
         return id;
     }
@@ -34,6 +42,7 @@ public class SysResource {
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+        setStartTimeStr("");
     }
 
     public Date getEndTime() {
@@ -42,6 +51,7 @@ public class SysResource {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+        setEndTimeStr("");
     }
 
     public String getRoomAddress() {
@@ -74,5 +84,21 @@ public class SysResource {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getStartTimeStr() {
+        return startTimeStr;
+    }
+
+    public void setStartTimeStr(String startTimeStr) {
+        this.startTimeStr = format.format(getStartTime());
+    }
+
+    public String getEndTimeStr() {
+        return endTimeStr;
+    }
+
+    public void setEndTimeStr(String endTimeStr) {
+        this.endTimeStr = format.format(getEndTime());
     }
 }

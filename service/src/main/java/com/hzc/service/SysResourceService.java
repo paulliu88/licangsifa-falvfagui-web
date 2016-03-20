@@ -35,4 +35,7 @@ public class SysResourceService {
     }
 
 
+    public List<SysResource> getOrderBy(String roomNo, String desc) {
+        return D.sysResourceMapper().getOrderBy(roomNo, desc);
+    }
 }

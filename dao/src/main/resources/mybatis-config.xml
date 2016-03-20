@@ -74,6 +74,7 @@
         </environment>
     </environments>
     <mappers>
+        <mapper resource="mybatis/PufaImportMapper.xml"></mapper>
         <mapper resource="mybatis/HisAnswerMapper.xml"></mapper>
         <mapper resource="mybatis/HisCollectionMapper.xml"></mapper>
         <mapper resource="mybatis/HisPaperItemMapper.xml"></mapper>
