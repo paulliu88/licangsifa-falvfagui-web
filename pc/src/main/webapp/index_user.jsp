@@ -141,7 +141,7 @@
     <div>
       <div class="center">
         <h1>
-          <img src="assets/system/pufa/img/biaozi.png">
+          <img src="${basePath}assets/system/pufa/img/biaozi.png">
           <span class="my-title-font">李沧区干部法律法规学习测试系统</span>
         </h1>
       </div>
@@ -222,7 +222,7 @@
                   -->
                   <div class="col-xs-2"></div>
                   <div class="col-xs-8" style="text-align: center;">
-                    <img src="assets/system/pufa/img/erweima/licangsifa.png"
+                    <img src="${basePath}assets/system/pufa/img/erweima/licangsifa.png"
                          style="width: 100%;">
                   </div>
                 </div>

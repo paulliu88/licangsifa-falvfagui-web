@@ -6,8 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<!DOCTYPE html>--%>
+<!DOCTYPE html>
 <html lang="en">
+<%
+  String path = request.getContextPath();
+  String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <head>
   <meta charset="utf-8"/>
   <title>李沧区干部法律法规学习测试系统</title>
@@ -16,9 +20,9 @@
         content="该学习软件题库共有2000题，主要包括党的十八大、十八届三中、 四中全会议精神和党内法规、干部廉洁自律的有关规定以及公务员依法履职应当掌握的法律法规等内容，旨在通过干部学法用法，带动全民学法守法，努力营造办事依法、遇事找法、解决问题用法、化解矛盾靠法的 良好法治氛围。"/>
   <meta name="application-name" content="李沧区干部法律法规学习测试系统"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="bookmark" type="image/x-icon" href="assets/system/pufa/img/logo.ico"/>
-  <link rel="shortcut icon" href="assets/system/pufa/img/logo.ico"/>
-  <link rel="icon" href="assets/system/pufa/img/logo.ico"/>
+  <link rel="bookmark" type="image/x-icon" href="${basePath}assets/system/pufa/img/logo.ico"/>
+  <link rel="shortcut icon" href="${basePath}assets/system/pufa/img/logo.ico"/>
+  <link rel="icon" href="${basePath}assets/system/pufa/img/logo.ico"/>
 
   <!--
     判断IE浏览器版本小于IE8，则直接提示更新。

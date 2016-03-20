@@ -11,7 +11,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String basePath = request.getScheme() + ":/" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE html>
@@ -20,19 +20,19 @@
     <meta charset="utf-8"/>
     <title>李沧区干部普法学习测试系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="bookmark" type="image/x-icon" href="${basePath}assets/system/pufa/img/logo.ico"/>
-    <link rel="shortcut icon" href="${basePath}assets/system/pufa/img/logo.ico"/>
-    <link rel="icon" href="${basePath}assets/system/pufa/img/logo.ico"/>
+    <link rel="bookmark" type="image/x-icon" href="<%=path%>/assets/system/pufa/img/logo.ico"/>
+    <link rel="shortcut icon" href="<%=path%>/assets/system/pufa/img/logo.ico"/>
+    <link rel="icon" href="<%=path%>/assets/system/pufa/img/logo.ico"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!-- basic styles -->
 
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
+    <link href="<%=path%>/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="<%=path%>/assets/css/font-awesome.min.css"/>
 
     <!--[if IE 7]>
-    <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css"/>
+    <link rel="stylesheet" href="<%=path%>/assets/css/font-awesome-ie7.min.css"/>
     <![endif]-->
 
     <!-- page specific plugin styles -->
@@ -40,11 +40,11 @@
     <!-- fonts -->
 
 
-    <link rel="stylesheet" href="/assets/css/ace.min.css"/>
-    <link rel="stylesheet" href="/assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="<%=path%>/assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="<%=path%>/assets/css/ace-rtl.min.css"/>
 
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="/assets/css/ace-ie.min.css"/>
+    <link rel="stylesheet" href="<%=path%>/assets/css/ace-ie.min.css"/>
     <![endif]-->
 
     <!-- inline styles related to this page -->
@@ -55,11 +55,11 @@
       判断IE浏览器版本小于IE8，则直接提示更新。
     -->
     <!--[if lte IE 7]>
-    <script>window.location.href = 'http://cdn.dmeng.net/upgrade-your-browser.html?referrer=' + location.href;</script>
+    <script>window.location.href = 'http:/cdn.dmeng.net/upgrade-your-browser.html?referrer=' + location.href;</script>
     <![endif]-->
     <!--[if lt IE 9]>
-    <script src="/assets/js/html5shiv.js"></script>
-    <script src="/assets/js/respond.min.js"></script>
+    <script src="<%=path%>/assets/js/html5shiv.js"></script>
+    <script src="<%=path%>/assets/js/respond.min.js"></script>
     <![endif]-->
 
     <style type="text/css">
@@ -140,7 +140,7 @@
     <div class="main-content">
         <div class="center">
             <h1>
-                <img src="/assets/system/pufa/img/biaozi.png">
+                <img src="<%=path%>/assets/system/pufa/img/biaozi.png">
                 <span class="my-title-font">李沧区干部法律法规学习测试系统</span>
             </h1>
         </div>
@@ -176,34 +176,34 @@
 <!-- /.main-container -->
 <!-- basic scripts -->
 <!--[if !IE]> -->
-<script src="/assets/js/jquery-2.0.3.min.js"></script>
+<script src="<%=path%>/assets/js/jquery-2.0.3.min.js"></script>
 <!-- <![endif]-->
 <!--[if IE]>
-<script src="/assets/js/jquery-1.10.2.min.js"></script>
+<script src="<%=path%>/assets/js/jquery-1.10.2.min.js"></script>
 <![endif]-->
 <!--[if !IE]> -->
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    window.jQuery || document.write("<script src='<%=path%>/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
 </script>
 <!-- <![endif]-->
 <!--[if IE]>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+    window.jQuery || document.write("<script src='<%=path%>/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
 </script>
 <![endif]-->
 <script type="text/javascript">
-    if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    if ("ontouchend" in document) document.write("<script src='<%=path%>/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
-<script src="/assets/js/bootstrap.min.js"></script>
-<script src="/assets/js/typeahead-bs2.min.js"></script>
-<script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
-<script src="/assets/js/bootbox.min.js"></script>
+<script src="<%=path%>/assets/js/bootstrap.min.js"></script>
+<script src="<%=path%>/assets/js/typeahead-bs2.min.js"></script>
+<script src="<%=path%>/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="<%=path%>/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="<%=path%>/assets/js/bootbox.min.js"></script>
 
 <!-- ace scripts -->
 
-<script src="/assets/js/ace-elements.min.js"></script>
-<script src="config.js"></script>
+<script src="<%=path%>/assets/js/ace-elements.min.js"></script>
+<script src="<%=path%>/config.js"></script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     $(function () {

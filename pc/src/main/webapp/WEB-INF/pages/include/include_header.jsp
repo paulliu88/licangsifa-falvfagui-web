@@ -23,51 +23,51 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=9">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="bookmark" type="image/x-icon" href="/assets/system/pufa/img/logo.ico"/>
-  <link rel="shortcut icon" href="/assets/system/pufa/img/logo.ico"/>
-  <link rel="icon" href="/assets/system/pufa/img/logo.ico"/>
+  <link rel="bookmark" type="image/x-icon" href="<%=path%>/assets/system/pufa/img/logo.ico"/>
+  <link rel="shortcut icon" href="<%=path%>/assets/system/pufa/img/logo.ico"/>
+  <link rel="icon" href="<%=path%>/assets/system/pufa/img/logo.ico"/>
 
   <!-- basic styles -->
 
-  <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
+  <link href="<%=path%>/assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/font-awesome.min.css"/>
 
   <!--[if IE 7]>
-  <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/font-awesome-ie7.min.css"/>
   <![endif]-->
 
   <!-- page specific plugin styles -->
 
-  <link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css"/>
-  <link rel="stylesheet" href="/assets/css/jquery.gritter.css"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/jquery-ui-1.10.3.custom.min.css"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/jquery.gritter.css"/>
 
   <!-- fonts -->
 
   <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />-->
 
-  <link rel="stylesheet" href="/assets/css/ui.jqgrid.css"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/ui.jqgrid.css"/>
   <!-- ace styles -->
 
-  <link rel="stylesheet" href="/assets/css/ace.min.css"/>
-  <link rel="stylesheet" href="/assets/css/ace-rtl.min.css"/>
-  <link rel="stylesheet" href="/assets/css/ace-skins.min.css"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/ace.min.css"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/ace-rtl.min.css"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/ace-skins.min.css"/>
 
   <!--[if lte IE 8]>
-  <link rel="stylesheet" href="/assets/css/ace-ie.min.css"/>
+  <link rel="stylesheet" href="<%=path%>/assets/css/ace-ie.min.css"/>
   <![endif]-->
 
   <%-- 新手引导效果库 --%>
-  <link rel="stylesheet" href="/assets/js/joyride/joyride-2.1.css">
+  <link rel="stylesheet" href="<%=path%>/assets/js/joyride/joyride-2.1.css">
 
   <!-- inline styles related to this page -->
 
   <!--        OWN CSS              -->
-  <link rel="stylesheet" href="/assets/system/pufa/css/header-main.css">
+  <link rel="stylesheet" href="<%=path%>/assets/system/pufa/css/header-main.css">
 
   <!-- ace settings handler -->
-  <link type="text/css" rel="stylesheet" href="/assets/js/datatables/css/jquery.dataTables.min.css"/>
+  <link type="text/css" rel="stylesheet" href="<%=path%>/assets/js/datatables/css/jquery.dataTables.min.css"/>
 
-  <link type="text/css" rel="stylesheet" href="/assets/css/hzc.datatable.css">
+  <link type="text/css" rel="stylesheet" href="<%=path%>/assets/css/hzc.datatable.css">
 
   <!--
     判断IE浏览器版本小于IE8，则直接提示更新。
@@ -76,13 +76,13 @@
   <script>window.location.href = 'http://cdn.dmeng.net/upgrade-your-browser.html?referrer=' + location.href;</script>
   <![endif]-->
 
-  <script src="/assets/js/ace-extra.min.js"></script>
+  <script src="<%=path%>/assets/js/ace-extra.min.js"></script>
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
   <!--[if lt IE 9]>
-  <script src="/assets/js/html5shiv.js"></script>
-  <script src="/assets/js/respond.min.js"></script>
+  <script src="<%=path%>/assets/js/html5shiv.js"></script>
+  <script src="<%=path%>/assets/js/respond.min.js"></script>
   <![endif]-->
 
   <!--[if lte IE 8]>
@@ -122,7 +122,7 @@
          style="height: 160px; background: none repeat scroll 0px 0px #1687D5;">
 
       <div class="my-header" style="padding-left: 5%">
-        <img src="/assets/system/pufa/img/biaozi.png">
+        <img src="<%=path%>/assets/system/pufa/img/biaozi.png">
                     <span class="my-title-index">
                             李沧区干部法律法规学习测试系统
                     </span><!-- /.brand -->
@@ -152,14 +152,14 @@
             <a href="CommonCtrl.goTo.do?path=/WEB-INF/pages/study/pre/main.jsp" title="点击打开学习题库"
                class="btn dropdown-toggle my-btn-default"
                style="width:116px;font-size: 18px;border-width: 0px;">
-              <img src="/assets/system/pufa/img/menu/lx.png" class="my-menu-item">
+              <img src="<%=path%>/assets/system/pufa/img/menu/lx.png" class="my-menu-item">
               学习题库
             </a>
 
             <button title="鼠标经过自动打开下拉菜单" class="btn  dropdown-toggle my-btn-default"
                     data-toggle="dropdown"
                     style="height:100%;border-width: 0px;width: 18px !important;">
-              <img src="/assets/system/pufa/img/icon/dropdown.png" style="height: 30px;">
+              <img src="<%=path%>/assets/system/pufa/img/icon/dropdown.png" style="height: 30px;">
               <%--<span class="icon-caret-down icon-only "></span>--%>
             </button>
 
@@ -189,7 +189,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle" href="#"
                data-href="CommonCtrl.goTo.do?path=/WEB-INF/pages/study/test_pre.jsp">
               <%--<i class="icon-bell-alt icon-animated-bell"></i>--%>
-              <img src="/assets/system/pufa/img/menu/mn.png" class="my-menu-item">
+              <img src="<%=path%>/assets/system/pufa/img/menu/mn.png" class="my-menu-item">
               模拟考试
               <%--<span class="badge badge-important">8</span>--%>
             </a>
@@ -198,7 +198,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle" href="#"
                data-href="CommonCtrl.goTo.do?path=/WEB-INF/pages/study/collect.jsp">
               <%--<i class="icon-envelope icon-animated-vertical"></i>--%>
-              <img src="/assets/system/pufa/img/menu/sc.png" class="my-menu-item">
+              <img src="<%=path%>/assets/system/pufa/img/menu/sc.png" class="my-menu-item">
               收藏题库
               <%--<span class="badge badge-success">5</span>--%>
             </a>
@@ -208,7 +208,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle" href="#"
                data-href="CommonCtrl.goTo.do?path=/WEB-INF/pages/study/error.jsp">
               <%--<i class="icon-envelope icon-animated-vertical"></i>--%>
-              <img src="/assets/system/pufa/img/menu/ct.png" class="my-menu-item">
+              <img src="<%=path%>/assets/system/pufa/img/menu/ct.png" class="my-menu-item">
               错题题库
               <%--<span class="badge badge-success">5</span>--%>
             </a>
@@ -217,7 +217,7 @@
           <li id="my-user-login-menu" data-is-modal="logout" data-href="CommonCtrl.goTo.do?path=/index_user.jsp">
             <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
               <%--<i class="icon-envelope icon-animated-vertical"></i>--%>
-              <img src="/assets/system/pufa/img/icon/fanhui.png" class="my-menu-item">
+              <img src="<%=path%>/assets/system/pufa/img/icon/fanhui.png" class="my-menu-item">
               返回登录
               <%--<span class="badge badge-success">5</span>--%>
             </a>
@@ -226,7 +226,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle" href="#"
                data-href="CommonCtrl.goTo.do?path=/WEB-INF/pages/study/ti_all.jsp">
               <%--<i class="icon-tasks"></i>--%>
-              <img src="/assets/system/pufa/img/menu/qt.png" class="my-menu-item">
+              <img src="<%=path%>/assets/system/pufa/img/menu/qt.png" class="my-menu-item">
               总题库
               <%--<span class="badge badge-grey">4</span>--%>
             </a>
@@ -250,7 +250,7 @@
           </li>
           <li class="light-blue" style="display: none;">
             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-              <img class="nav-user-photo" src="/assets/avatars/user.jpg"
+              <img class="nav-user-photo" src="<%=path%>/assets/avatars/user.jpg"
                    alt="Jason's Photo"/>
 								<span class="user-info">
 									<small>个人中心,</small>
@@ -290,70 +290,70 @@
 
         <!--[if !IE]> -->
 
-        <script src="/assets/js/jquery-2.0.3.min.js"></script>
+        <script src="<%=path%>/assets/js/jquery-2.0.3.min.js"></script>
 
         <!-- <![endif]-->
 
         <!--[if IE]>
-        <script src="/assets/js/jquery-1.10.2.min.js"></script>
+        <script src="<%=path%>/assets/js/jquery-1.10.2.min.js"></script>
         <![endif]-->
 
         <!--[if !IE]> -->
 
         <script type="text/javascript">
-          window.jQuery || document.write("<script src='/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+          window.jQuery || document.write("<script src='<%=path%>/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
         </script>
 
         <!-- <![endif]-->
 
         <!--[if IE]>
         <script type="text/javascript">
-          window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+          window.jQuery || document.write("<script src='<%=path%>/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
         </script>
         <![endif]-->
 
         <script type="text/javascript">
-          if ("ontouchend" in document) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+          if ("ontouchend" in document) document.write("<script src='<%=path%>/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
         </script>
-        <script src="/assets/js/bootstrap.min.js"></script>
-        <script src="/assets/js/typeahead-bs2.min.js"></script>
+        <script src="<%=path%>/assets/js/bootstrap.min.js"></script>
+        <script src="<%=path%>/assets/js/typeahead-bs2.min.js"></script>
 
         <!-- page specific plugin scripts -->
 
         <!--[if lte IE 8]>
-        <script src="/assets/js/excanvas.min.js"></script>
+        <script src="<%=path%>/assets/js/excanvas.min.js"></script>
         <![endif]-->
 
-        <script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
-        <script src="/assets/js/bootbox.min.js"></script>
-        <script src="/assets/js/jquery.easy-pie-chart.min.js"></script>
-        <script src="/assets/js/jquery.gritter.min.js"></script>
+        <script src="<%=path%>/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="<%=path%>/assets/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="<%=path%>/assets/js/bootbox.min.js"></script>
+        <script src="<%=path%>/assets/js/jquery.easy-pie-chart.min.js"></script>
+        <script src="<%=path%>/assets/js/jquery.gritter.min.js"></script>
         <%--<script src="/assets/js/spin.min.js"></script>--%>
-        <script src="/assets/js/jquery.knob.min.js"></script>
+        <script src="<%=path%>/assets/js/jquery.knob.min.js"></script>
 
-        <script src="/assets/js/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="/assets/js/datatables/js/fnReloadAjax.js"></script>
+        <script src="<%=path%>/assets/js/datatables/js/jquery.dataTables.min.js"></script>
+        <script src="<%=path%>/assets/js/datatables/js/fnReloadAjax.js"></script>
 
         <!-- ace scripts -->
-        <script src="/assets/js/ace-elements.min.js"></script>
-        <script src="/assets/js/ace.min.js"></script>
+        <script src="<%=path%>/assets/js/ace-elements.min.js"></script>
+        <script src="<%=path%>/assets/js/ace.min.js"></script>
 
         <%-- 新手引导效果脚本 --%>
-        <script type="text/javascript" src="/assets/js/joyride/jquery.cookie.js"></script>
-        <script type="text/javascript" src="/assets/js/joyride/modernizr.mq.js"></script>
-        <script type="text/javascript" src="/assets/js/joyride/jquery.joyride-2.1.js"></script>
+        <script type="text/javascript" src="<%=path%>/assets/js/joyride/jquery.cookie.js"></script>
+        <script type="text/javascript" src="<%=path%>/assets/js/joyride/modernizr.mq.js"></script>
+        <script type="text/javascript" src="<%=path%>/assets/js/joyride/jquery.joyride-2.1.js"></script>
 
         <!-- inline scripts related to this page -->
 
         <!-- OWN JS -->
-        <script src="/config.js"></script>
-        <script src="/assets/js/jquery.toaster.js"></script>
-        <script src="/assets/js/hzc.common.1.0.js"></script>
-        <script src="/assets/js/hzc.datatable.js"></script>
+        <script src="<%=path%>/config.js"></script>
+        <script src="<%=path%>/assets/js/jquery.toaster.js"></script>
+        <script src="<%=path%>/assets/js/hzc.common.1.0.js"></script>
+        <script src="<%=path%>/assets/js/hzc.datatable.js"></script>
 
         <!-- jquery 打印插件 -->
-        <script src="/assets/js/jquery.jqprint-0.3.js"></script>
+        <script src="<%=path%>/assets/js/jquery.jqprint-0.3.js"></script>
         <script type="text/javascript">
           var key = '__is_full_screen';
           function minScreen() {
